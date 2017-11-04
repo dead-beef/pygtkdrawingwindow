@@ -354,29 +354,7 @@ class ImageWindow(DrawingWindow):
     def image(self, img):
         self.stop()
 
-        if isinstance(img, (str, unicode)):
-            try:
-                img = rsvg.Handle(img)
-            except glib.GError:
-                img = gtk.image_new_from_file(img)
-
-        if isinstance(img, gtk.Image):
-            dtype = img.get_storage_type()
-            if dtype == gtk.IMAGE_EMPTY:
-                img = None
-            elif dtype == gtk.IMAGE_PIXBUF:
-                img = img.get_pixbuf()
-            elif dtype == gtk.IMAGE_ANIMATION:
-                img = img.get_animation()
-            elif dtype == gtk.IMAGE_STOCK:
-                name, size = img.get_stock()
-                img = self.render_icon(name, size)
-            else:
-                raise ValueError('Unknown image type: ' + str(dtype))
-
-        if isinstance(img, gtk.gdk.PixbufAnimation) and img.is_static_image():
-            img = img.get_static_image()
-
+        img = load_image(img, self)
         size = get_image_size(img)
         self._image = img
         self.size = size
@@ -509,3 +487,36 @@ def get_image_size(img):
         return get_gtk_image_size(img)
 
     raise ValueError('Unknown image type: ' + str(img))
+
+def load_image(img, widget=None):
+    if isinstance(img, (str, unicode)):
+        try:
+            img = rsvg.Handle(img)
+        except glib.GError:
+            img = gtk.image_new_from_file(img)
+
+    if isinstance(img, gtk.Image):
+        dtype = img.get_storage_type()
+        if dtype == gtk.IMAGE_EMPTY:
+            img = None
+        elif dtype == gtk.IMAGE_PIXBUF:
+            img = img.get_pixbuf()
+        elif dtype == gtk.IMAGE_ANIMATION:
+            img = img.get_animation()
+        elif dtype == gtk.IMAGE_STOCK:
+            create_widget = widget is None
+            if create_widget:
+                widget = gtk.Label()
+            try:
+                name, size = img.get_stock()
+                img = widget.render_icon(name, size)
+            finally:
+                if create_widget:
+                    widget.destroy()
+        else:
+            raise ValueError('Unknown image type: ' + str(dtype))
+
+    if isinstance(img, gtk.gdk.PixbufAnimation) and img.is_static_image():
+        img = img.get_static_image()
+
+    return img
