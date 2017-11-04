@@ -344,7 +344,8 @@ class ImageWindow(DrawingWindow):
 
         self.screen.add_events(gtk.gdk.STRUCTURE_MASK)
         self.screen.connect('map_event', self.animate)
-        #self.screen.connect('unmap_event', self.stop)
+        self.screen.connect('unmap_event', self.stop)
+        self.screen.connect('destroy', self.stop)
 
     @property
     def image(self):
