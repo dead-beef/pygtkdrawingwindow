@@ -21,6 +21,7 @@ def main():
     wnd.set_default_size(400, 300)
 
     img = ImageWindow(sys.argv[1])
+    #img = ImageWindow(gtk.image_new_from_stock(gtk.STOCK_OPEN, gtk.ICON_SIZE_MENU))
 
     vbox = gtk.VBox()
     wnd.add(vbox)
