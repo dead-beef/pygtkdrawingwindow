@@ -11,8 +11,14 @@
 
 ## Installation
 
-```
+```bash
 python setup.py install
+```
+
+```bash
+git clone https://github.com/dead-beef/pygtkdrawingwindow
+cd pygtkdrawingwindow
+pip install -e .[dev]
 ```
 
 ## Licenses
