@@ -1,0 +1,23 @@
+[MASTER]
+
+persistent=no
+extension-pkg-whitelist=
+
+[MESSAGES CONTROL]
+
+disable=too-few-public-methods,too-many-public-methods,too-many-instance-attributes,maybe-no-member,star-args
+
+[TYPECHECK]
+
+ignored-modules=gi.repository.Gtk,gi.repository.Gdk,gtk,cairo
+ignored-classes=
+generated-members=
+
+[BASIC]
+
+good-names=i,j,k,x,y,z,m,s,db,fp,ex,Run,_,gtk_image_new_from_file,gtk_image_new_from_stock,cairo_set_source_pixbuf,rsvg_handle_new_from_file,ImageType,PolicyType,ScrollDirection,rsvg,izip
+
+
+[FORMAT]
+
+max-line-length=80
