@@ -1,9 +1,14 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
-import pygtk
-pygtk.require('2.0')
-import gobject
-import gtk
+from __future__ import print_function
+
+try:
+    import pygtk
+    pygtk.require('2.0')
+    import gobject
+    import gtk
+except ImportError:
+    from gi.repository import Gtk as gtk, GObject as gobject
 
 import sys
 
@@ -12,8 +17,13 @@ from pygtkdrawingwindow import ImageWindow
 
 def main():
     if len(sys.argv) != 2:
-        print 'Usage:', sys.argv[0], '<image>'
+        print('Usage:', sys.argv[0], '<image>')
         exit(1)
+
+    try:
+        toolbar_style = gtk.TOOLBAR_ICONS
+    except AttributeError:
+        toolbar_style = gtk.ToolbarStyle.ICONS
 
     gobject.threads_init()
 
@@ -27,7 +37,7 @@ def main():
     wnd.add(vbox)
 
     toolbar = gtk.Toolbar()
-    toolbar.set_style(gtk.TOOLBAR_ICONS)
+    toolbar.set_style(toolbar_style)
 
     btn = gtk.ToolButton(gtk.STOCK_ZOOM_IN)
     btn.set_tooltip_text('Zoom In')
@@ -59,8 +69,8 @@ def main():
     btn.connect('clicked', img.zoom_fit_or_1to1)
     toolbar.insert(btn, -1)
 
-    vbox.pack_start(toolbar, False, False)
-    vbox.pack_start(img)
+    vbox.pack_start(toolbar, False, False, 0)
+    vbox.pack_start(img, True, True, 0)
 
     wnd.connect('destroy', gtk.main_quit)
     wnd.show_all()

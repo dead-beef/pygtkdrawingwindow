@@ -1,24 +1,102 @@
-import pygtk
-pygtk.require('2.0')
-import glib
-import gtk
+from __future__ import division, print_function
+
+import sys
+
+from argparse import Namespace
+from contextlib import contextmanager
+
 import cairo
 
+class NoRsvg(object):
+    class Handle(object):
+        @staticmethod
+        def error():
+            raise glib.GError('no rsvg')
+        def __init__(self, *_):
+            self.error()
+        @classmethod
+        def new_from_file(cls, *_):
+            cls.error()
+
+try:
+    if 'gi' in sys.modules:
+        raise ImportError('use gi')
+
+    import pygtk
+    pygtk.require('2.0')
+    import glib
+    import gtk
+    from gtk import gdk
+    from gtk.gdk import Pixbuf, PixbufAnimation
+
+    try:
+        import rsvg
+    except ImportError:
+        rsvg = NoRsvg
+
+    PYGTK = True
+except ImportError:
+    from gi.repository import Gtk as gtk, Gdk as gdk, GLib as glib
+    from gi.repository.Gtk import ImageType, PolicyType
+    from gi.repository.Gdk import ScrollDirection
+    from gi.repository.GdkPixbuf import Pixbuf, PixbufAnimation
+
+    try:
+        from gi.repository import Rsvg as rsvg
+    except ImportError:
+        rsvg = NoRsvg
+
+    PYGTK = False
+
+
 from math import ceil, sin, cos
-from itertools import izip, product
+from itertools import product
 from threading import Thread, Lock
 from time import sleep
 
+try:
+    from itertools import izip
+except ImportError:
+    izip = zip
 
-class NoRsvg(object): # pylint:disable=too-few-public-methods
-    class Handle(object): # pylint:disable=too-few-public-methods
-        def __init__(self, *args, **kwargs): # pylint:disable=unused-argument
-            raise glib.GError('no rsvg')
 
 try:
-    import rsvg
-except ImportError:
-    rsvg = NoRsvg # pylint:disable=invalid-name
+    STRING_TYPES = (str, unicode)
+except NameError:
+    STRING_TYPES = (str, bytes)
+
+if PYGTK:
+    gtk_image_new_from_file = gtk.image_new_from_file
+    gtk_image_new_from_stock = gtk.image_new_from_stock
+    cairo_set_source_pixbuf = gdk.CairoContext.set_source_pixbuf
+    rsvg_handle_new_from_file = rsvg.Handle
+
+    ImageType = Namespace(
+        EMPTY=gtk.IMAGE_EMPTY,
+        PIXBUF=gtk.IMAGE_PIXBUF,
+        ANIMATION=gtk.IMAGE_ANIMATION,
+        IMAGE=gtk.IMAGE_IMAGE,
+        PIXMAP=gtk.IMAGE_PIXMAP,
+        STOCK=gtk.IMAGE_STOCK,
+        ICON_SET=gtk.IMAGE_ICON_SET
+    )
+    PolicyType = Namespace(
+        ALWAYS=gtk.POLICY_ALWAYS,
+        AUTOMATIC=gtk.POLICY_AUTOMATIC,
+        NEVER=gtk.POLICY_NEVER
+    )
+    ScrollDirection = Namespace(
+        UP=gdk.SCROLL_UP,
+        DOWN=gdk.SCROLL_DOWN,
+        LEFT=gdk.SCROLL_LEFT,
+        RIGHT=gdk.SCROLL_RIGHT,
+        SMOOTH=None
+    )
+else:
+    gtk_image_new_from_file = gtk.Image.new_from_file
+    gtk_image_new_from_stock = gtk.Image.new_from_stock
+    cairo_set_source_pixbuf = gdk.cairo_set_source_pixbuf
+    rsvg_handle_new_from_file = rsvg.Handle.new_from_file
 
 
 class DrawingWindow(gtk.ScrolledWindow):
@@ -30,10 +108,31 @@ class DrawingWindow(gtk.ScrolledWindow):
     FIT_HEIGHT = 3
     FIT_OR_1TO1 = 4
 
+    if PYGTK:
+        POLICY = gtk.POLICY_AUTOMATIC
+        SHADOW = gtk.SHADOW_NONE
+        EVENTS = gdk.POINTER_MOTION_MASK \
+                 | gdk.POINTER_MOTION_HINT_MASK \
+                 | gdk.LEAVE_NOTIFY_MASK \
+                 | gdk.BUTTON_PRESS_MASK \
+                 | gdk.BUTTON_MOTION_MASK
+        BUTTON_MASK = gdk.BUTTON2_MASK | gdk.BUTTON1_MASK
+    else:
+        POLICY = gtk.PolicyType.AUTOMATIC
+        SHADOW = gtk.ShadowType.NONE
+        EVENTS = gdk.EventMask.POINTER_MOTION_MASK \
+                 | gdk.EventMask.POINTER_MOTION_HINT_MASK \
+                 | gdk.EventMask.LEAVE_NOTIFY_MASK \
+                 | gdk.EventMask.BUTTON_PRESS_MASK \
+                 | gdk.EventMask.BUTTON_MOTION_MASK
+        BUTTON_MASK = gdk.ModifierType.BUTTON2_MASK \
+                      | gdk.ModifierType.BUTTON1_MASK
+
     def __init__(self, fit=FIT_OR_1TO1, draw=None):
         super(DrawingWindow, self).__init__()
-        self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        self.set_shadow_type(gtk.SHADOW_NONE)
+
+        self.set_policy(self.POLICY, self.POLICY)
+        self.set_shadow_type(self.SHADOW)
 
         self.screen = gtk.DrawingArea()
         self.add_with_viewport(self.screen)
@@ -61,20 +160,17 @@ class DrawingWindow(gtk.ScrolledWindow):
 
         self.scale = 1.0
 
-        self.screen.set_events(
-            gtk.gdk.POINTER_MOTION_MASK |
-            gtk.gdk.POINTER_MOTION_HINT_MASK |
-            gtk.gdk.LEAVE_NOTIFY_MASK |
-            gtk.gdk.BUTTON_PRESS_MASK |
-            gtk.gdk.BUTTON_MOTION_MASK
-        )
+        self.screen.set_events(self.EVENTS)
         #self.screen.set_double_buffered(False)
         self.connect('size_allocate', self.update_fit)
-        self.screen.connect('expose_event', self.expose_event)
-        self.screen.connect('scroll_event', self.scroll_event)
+        self.connect('scroll_event', self.scroll_event)
         self.screen.connect('size_allocate', self.size_allocate_event)
         self.screen.connect('motion_notify_event', self.motion_notify_event)
         self.screen.connect('leave_notify_event', self.leave_notify_event)
+        if PYGTK:
+            self.screen.connect('expose_event', self.expose_event)
+        else:
+            self.screen.connect('draw', self.draw_event)
 
     @property
     def scale(self):
@@ -82,7 +178,6 @@ class DrawingWindow(gtk.ScrolledWindow):
 
     @scale.setter
     def scale(self, scale):
-        scale = float(scale)
         self.screen.set_size_request(*(int(sz * scale) for sz in self.size))
         if self._prev_scale is None:
             self._prev_scale = self._scale
@@ -154,10 +249,11 @@ class DrawingWindow(gtk.ScrolledWindow):
             self.pointer = tuple(x * dscale for x in pointer)
 
         dscale -= 1
+
         for x, scrollbar in izip(pointer, scrollbars):
-            adj = scrollbar.get_adjustment()
+            #adj = scrollbar.get_adjustment()
             value = scrollbar.get_value() + dscale * x
-            value = min(adj.upper, max(adj.lower, value))
+            #value = min(adj.get_upper(), max(adj.get_lower(), value))
             scrollbar.set_value(value)
 
         self._prev_scale = None
@@ -170,37 +266,36 @@ class DrawingWindow(gtk.ScrolledWindow):
             raise
 
     def size_allocate_event(self, *_):
-        if self.screen.window is not None:
-            self.screen.window.freeze_updates()
-        try:
+        with freeze(self.screen):
             self._zoom_scroll()
             self.update_fit()
-        finally:
-            if self.screen.window is not None:
-                self.screen.window.thaw_updates()
 
     def expose_event(self, _, event):
-        ctx = self.screen.window.cairo_create()
-
+        ctx = self.screen.get_window().cairo_create()
         ctx.rectangle(event.area.x, event.area.y,
                       event.area.width, event.area.height)
         ctx.clip()
+        self.draw_event(None, ctx)
 
+    def draw_event(self, _, ctx):
         width, height = self.size
         width *= 0.5
         height *= 0.5
-        size = self.screen.window.get_size()
+        size = self.screen.get_allocation()
+        size = (size.width, size.height)
         off = [max(0, (wnd_size - img_size * self.scale) / 2)
                for wnd_size, img_size in izip(size, self.size)]
 
-        ctx.identity_matrix()
+        #ctx.identity_matrix()
+        #ctx.save()
         ctx.translate(*off)
         ctx.scale(self.scale, self.scale)
         ctx.translate(width, height)
         ctx.rotate(self.rotate)
         ctx.translate(-width, -height)
 
-        self.draw(ctx)
+        self.render(ctx)
+        #ctx.restore()
 
     def leave_notify_event(self, *_):
         self.pointer = None
@@ -216,13 +311,13 @@ class DrawingWindow(gtk.ScrolledWindow):
         if self.pointer_root is None:
             self.pointer_root = pointer
 
-        if event.state & (gtk.gdk.BUTTON2_MASK | gtk.gdk.BUTTON1_MASK):
+        if event.state & self.BUTTON_MASK:
             scrollbars = (self.get_hscrollbar(), self.get_vscrollbar())
             scrollbars = izip(pointer, self.pointer_root, scrollbars)
             for cur, prev, scrollbar in scrollbars:
-                adj = scrollbar.get_adjustment()
+                #adj = scrollbar.get_adjustment()
                 value = scrollbar.get_value() + (prev - cur)
-                value = min(adj.upper, max(adj.lower, value))
+                #value = min(adj.get_upper(), max(adj.get_lower(), value))
                 scrollbar.set_value(value)
             ret = True
 
@@ -230,15 +325,16 @@ class DrawingWindow(gtk.ScrolledWindow):
         return ret
 
     def scroll_event(self, _, event):
-        #if event.state & gtk.gdk.CONTROL_MASK:
-        #    if event.direction == gtk.gdk.SCROLL_UP:
+        direction = get_scroll_direction(event)
+        #if event.state & gdk.CONTROL_MASK:
+        #    if direction == ScrollDirection.UP:
         #        self.rotate += 0.1
-        #    elif event.direction == gtk.gdk.SCROLL_DOWN:
+        #    elif direction == ScrollDirection.DOWN:
         #        self.rotate -= 0.1
         #    return True
-        if event.direction == gtk.gdk.SCROLL_UP:
+        if direction == ScrollDirection.UP:
             self.zoom_in()
-        elif event.direction == gtk.gdk.SCROLL_DOWN:
+        elif direction == ScrollDirection.DOWN:
             self.zoom_out()
         return True
 
@@ -264,7 +360,7 @@ class DrawingWindow(gtk.ScrolledWindow):
             return
         width, height = self.window_size
 
-        if float(width) / img_width < float(height) / img_height:
+        if width / img_width < height / img_height:
             self.zoom_fit_width()
         else:
             self.zoom_fit_height()
@@ -279,15 +375,15 @@ class DrawingWindow(gtk.ScrolledWindow):
 
         _, policy = self.get_policy()
 
-        if policy == gtk.POLICY_ALWAYS:
+        if policy == PolicyType.ALWAYS:
             scrollbar = True
         else:
-            scale = float(width - self._fit_offset) / img_width
-            scrollbar = (policy == gtk.POLICY_AUTOMATIC \
+            scale = (width - self._fit_offset) / img_width
+            scrollbar = (policy == PolicyType.AUTOMATIC \
                          and ceil(img_height * scale) >= height)
 
         if scrollbar:
-            scale = float(width - self._scrollbar_size - self._fit_offset)
+            scale = width - self._scrollbar_size - self._fit_offset
             scale /= img_width
 
         self.scale = scale
@@ -302,21 +398,21 @@ class DrawingWindow(gtk.ScrolledWindow):
 
         policy, _ = self.get_policy()
 
-        if policy == gtk.POLICY_ALWAYS:
+        if policy == PolicyType.ALWAYS:
             scrollbar = True
         else:
-            scale = float(height - self._fit_offset) / img_height
-            scrollbar = (policy == gtk.POLICY_AUTOMATIC \
+            scale = (height - self._fit_offset) / img_height
+            scrollbar = (policy == PolicyType.AUTOMATIC \
                          and ceil(img_width * scale) >= width)
 
         if scrollbar:
-            scale = float(height - self._scrollbar_size - self._fit_offset)
+            scale = height - self._scrollbar_size - self._fit_offset
             scale /= img_height
 
         self.scale = scale
         self.fit = self.FIT_HEIGHT
 
-    def draw(self, ctx):
+    def render(self, ctx):
         if self.draw_func is not None:
             self.draw_func(ctx)
 
@@ -326,9 +422,14 @@ class ImageWindow(DrawingWindow):
     MIN_ANIMATION_DELAY = 0.01
     MAX_ANIMATION_DELAY = 0.5
 
+    if PYGTK:
+        EVENTS = DrawingWindow.EVENTS | gdk.STRUCTURE_MASK
+    else:
+        EVENTS = DrawingWindow.EVENTS | gdk.EventMask.STRUCTURE_MASK
+
     def __init__(self,
                  image=None,
-                 image_filter=cairo.FILTER_GAUSSIAN,
+                 image_filter=cairo.FILTER_NEAREST,
                  new_image_fit=DrawingWindow.FIT_OR_1TO1):
         super(ImageWindow, self).__init__()
 
@@ -342,10 +443,10 @@ class ImageWindow(DrawingWindow):
 
         self.image = image
 
-        self.screen.add_events(gtk.gdk.STRUCTURE_MASK)
-        self.screen.connect('map_event', self.animate)
-        self.screen.connect('unmap_event', self.stop)
-        self.screen.connect('destroy', self.stop)
+        #self.screen.add_events(gdk.STRUCTURE_MASK)
+        self.screen.connect('map_event', print_('map', self.animate))
+        self.screen.connect('unmap_event', print_('unmap', self.stop))
+        self.screen.connect('destroy', print_('destroy', self.stop))
 
     @property
     def image(self):
@@ -371,7 +472,7 @@ class ImageWindow(DrawingWindow):
 
     def animate(self, *_):
         self.stop()
-        if isinstance(self.image, gtk.gdk.PixbufAnimation):
+        if isinstance(self.image, PixbufAnimation):
             self._animation = self.image.get_iter()
             self._animation_thread = Thread(target=self.animation_thread)
         else:
@@ -390,10 +491,10 @@ class ImageWindow(DrawingWindow):
 
     def animation_thread(self):
         while True:
-            with gtk.gdk.lock, self._lock:
+            with self._lock:
                 if self._animation is None:
                     return
-                if self.window is None: ##
+                if self.get_window() is None: ##
                     return
                 self._animation.advance()
                 delay = self._animation.get_delay_time()
@@ -403,35 +504,60 @@ class ImageWindow(DrawingWindow):
                 return
 
             delay = min(self.MAX_ANIMATION_DELAY,
-                        max(self.MIN_ANIMATION_DELAY, delay / 1000.0))
+                        max(self.MIN_ANIMATION_DELAY, delay / 1000))
             sleep(delay)
 
-    def draw(self, ctx):
-        if self.image is None:
+    def render(self, ctx):
+
+        img = self.image
+
+        if img is None:
             return
 
-        if isinstance(self.image, gtk.gdk.PixbufAnimation):
+        if isinstance(img, rsvg.Handle):
+            img.render_cairo(ctx)
+            return
+
+        if isinstance(img, PixbufAnimation):
             with self._lock:
-                pixbuf = self._animation.get_pixbuf()
-            ctx.set_source_pixbuf(pixbuf, 0, 0)
+                img = self._animation.get_pixbuf()
+
+        if isinstance(img, Pixbuf):
+            cairo_set_source_pixbuf(ctx, img, 0, 0)
             ctx.get_source().set_filter(self.image_filter)
             ctx.paint()
-        elif isinstance(self.image, gtk.gdk.Pixbuf):
-            ctx.set_source_pixbuf(self.image, 0, 0)
-            ctx.get_source().set_filter(self.image_filter)
-            ctx.paint()
-        elif isinstance(self.image, rsvg.Handle):
-            self.image.render_cairo(ctx)
-        else:
-            err = ValueError('Invalid image: ' + str(self.image))
-            img = gtk.image_new_from_stock(gtk.STOCK_MISSING_IMAGE,
-                                           gtk.ICON_SIZE_DIALOG)
-            self.image = img
-            raise err
+            return
+
+        self.image = gtk_image_new_from_stock(gtk.STOCK_MISSING_IMAGE,
+                                              gtk.ICON_SIZE_DIALOG)
+        raise ValueError('Invalid image: ' + str(img))
 
 
 def nop(*_):
     pass
+
+def print_(msg, func):
+    def ret(*args, **kwargs):
+        print(msg)
+        return func(*args, **kwargs)
+    return ret
+
+@contextmanager
+def freeze(widget):
+    window = widget.get_window()
+    if window is not None:
+        window.freeze_updates()
+    yield
+    if window is not None:
+        window.thaw_updates()
+
+def get_scroll_direction(event):
+    if event.direction == ScrollDirection.SMOOTH:
+        if event.delta_y < -0.01:
+            return ScrollDirection.UP
+        if event.delta_y > 0.01:
+            return ScrollDirection.DOWN
+    return event.direction
 
 def get_pixbuf_size(pixbuf):
     return (pixbuf.get_width(), pixbuf.get_height())
@@ -439,38 +565,32 @@ def get_pixbuf_size(pixbuf):
 def get_gtk_image_size(img):
     dtype = img.get_storage_type()
 
-    if dtype == gtk.IMAGE_EMPTY:
+    if dtype == ImageType.EMPTY:
         return (0, 0)
-
-    if dtype == gtk.IMAGE_PIXBUF:
+    if dtype == ImageType.PIXBUF:
         return get_pixbuf_size(img.get_pixbuf())
-
-    if dtype == gtk.IMAGE_ANIMATION:
+    if dtype == ImageType.ANIMATION:
         return get_pixbuf_size(img.get_animation())
+    if dtype == ImageType.STOCK:
+        return gtk.icon_size_lookup(img.get_stock()[1])
+    if dtype == ImageType.ICON_SET:
+        return gtk.icon_size_lookup(img.get_icon_set()[1])
 
-    if dtype == gtk.IMAGE_IMAGE:
-        img, mask = img.get_image()
-        if img is not None:
-            return (img.get_width(), img.get_height())
-        if mask is not None:
-            return mask.get_size()
-        return (0, 0)
-
-    if dtype == gtk.IMAGE_PIXMAP:
-        img, mask = img.get_pixmap()
-        if img is not None:
-            return img.get_size()
-        if mask is not None:
-            return mask.get_size()
-        return (0, 0)
-
-    if dtype == gtk.IMAGE_STOCK:
-        _, size = img.get_stock()
-        return gtk.icon_size_lookup(size)
-
-    if dtype == gtk.IMAGE_ICON_SET:
-        _, size = img.get_icon_set()
-        return gtk.icon_size_lookup(size)
+    #if PYGTK:
+    #    if dtype == ImageType.IMAGE:
+    #        img, mask = img.get_image()
+    #        if img is not None:
+    #            return (img.get_width(), img.get_height())
+    #        if mask is not None:
+    #            return mask.get_size()
+    #        return (0, 0)
+    #    if dtype == ImageType.PIXMAP:
+    #        img, mask = img.get_pixmap()
+    #        if img is not None:
+    #            return img.get_size()
+    #        if mask is not None:
+    #            return mask.get_size()
+    #        return (0, 0)
 
     raise ValueError('Unknown image type: ' + str(dtype))
 
@@ -479,9 +599,9 @@ def get_image_size(img):
         return (0, 0)
 
     if isinstance(img, rsvg.Handle):
-        return img.get_dimension_data()[:2]
+        return (img.get_property('width'), img.get_property('height'))
 
-    if isinstance(img, (gtk.gdk.Pixbuf, gtk.gdk.PixbufAnimation)):
+    if isinstance(img, (Pixbuf, PixbufAnimation)):
         return get_pixbuf_size(img)
 
     if isinstance(img, gtk.Image):
@@ -489,35 +609,45 @@ def get_image_size(img):
 
     raise ValueError('Unknown image type: ' + str(img))
 
-def load_image(img, widget=None):
-    if isinstance(img, (str, unicode)):
+def load_image_file(path):
+    try:
+        return rsvg_handle_new_from_file(path)
+    except glib.GError:
+        return gtk_image_new_from_file(path)
+
+def load_gtk_image(img, widget=None):
+    dtype = img.get_storage_type()
+
+    if dtype == ImageType.EMPTY:
+        return None
+
+    if dtype == ImageType.PIXBUF:
+        return img.get_pixbuf()
+
+    if dtype == ImageType.ANIMATION:
+        return img.get_animation()
+
+    if dtype == ImageType.STOCK:
+        create_widget = widget is None
+        if create_widget:
+            widget = gtk.Label()
         try:
-            img = rsvg.Handle(img)
-        except glib.GError:
-            img = gtk.image_new_from_file(img)
+            name, size = img.get_stock()
+            return widget.render_icon(name, size)
+        finally:
+            if create_widget:
+                widget.destroy()
+
+    raise ValueError('Unknown image type: ' + str(dtype))
+
+def load_image(img, widget=None):
+    if isinstance(img, STRING_TYPES):
+        img = load_image_file(img)
 
     if isinstance(img, gtk.Image):
-        dtype = img.get_storage_type()
-        if dtype == gtk.IMAGE_EMPTY:
-            img = None
-        elif dtype == gtk.IMAGE_PIXBUF:
-            img = img.get_pixbuf()
-        elif dtype == gtk.IMAGE_ANIMATION:
-            img = img.get_animation()
-        elif dtype == gtk.IMAGE_STOCK:
-            create_widget = widget is None
-            if create_widget:
-                widget = gtk.Label()
-            try:
-                name, size = img.get_stock()
-                img = widget.render_icon(name, size)
-            finally:
-                if create_widget:
-                    widget.destroy()
-        else:
-            raise ValueError('Unknown image type: ' + str(dtype))
+        img = load_gtk_image(img, widget)
 
-    if isinstance(img, gtk.gdk.PixbufAnimation) and img.is_static_image():
+    if isinstance(img, PixbufAnimation) and img.is_static_image():
         img = img.get_static_image()
 
     return img
