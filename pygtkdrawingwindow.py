@@ -25,6 +25,7 @@ try:
     import pygtk
     pygtk.require('2.0')
     import glib
+    import gobject
     import gtk
     from gtk import gdk
     from gtk.gdk import Pixbuf, PixbufAnimation
@@ -36,7 +37,12 @@ try:
 
     PYGTK = True
 except ImportError:
-    from gi.repository import Gtk as gtk, Gdk as gdk, GLib as glib
+    from gi.repository import (
+        Gtk as gtk,
+        Gdk as gdk,
+        GLib as glib,
+        GObject as gobject
+    )
     from gi.repository.Gtk import ImageType, PolicyType, IconSize
     from gi.repository.Gdk import ScrollDirection
     from gi.repository.GdkPixbuf import Pixbuf, PixbufAnimation
@@ -51,7 +57,6 @@ except ImportError:
 
 from math import ceil, sin, cos
 from itertools import product
-from threading import Thread, Lock
 from time import sleep
 
 try:
@@ -426,8 +431,7 @@ class DrawingWindow(gtk.ScrolledWindow):
 
 class ImageWindow(DrawingWindow):
 
-    MIN_ANIMATION_DELAY = 0.01
-    MAX_ANIMATION_DELAY = 0.5
+    MIN_ANIMATION_DELAY = 10
 
     if PYGTK:
         EVENTS = DrawingWindow.EVENTS | gdk.STRUCTURE_MASK
@@ -441,9 +445,9 @@ class ImageWindow(DrawingWindow):
         super(ImageWindow, self).__init__()
 
         self._image = None
-        self._animation_thread = None
+        self._animation_timeout = None
         self._animation = None
-        self._lock = Lock()
+        self._prev_delay = -1
 
         self.image_filter = image_filter
         self.new_image_fit = new_image_fit
@@ -480,42 +484,45 @@ class ImageWindow(DrawingWindow):
     def animate(self, *_):
         self.stop()
         if isinstance(self.image, PixbufAnimation):
+            self._prev_delay = -1
             self._animation = self.image.get_iter()
-            self._animation_thread = Thread(target=self.animation_thread)
-        else:
-            self._animation = None
-            self._animation_thread = None
-
-        if self._animation_thread is not None:
-            self._animation_thread.start()
+            self._animation_timeout = gobject.timeout_add(
+                0,
+                self.animation_step
+            )
 
     def stop(self, *_):
-        with self._lock:
-            if self._animation_thread is not None:
-                self._animation = None
-        if self._animation_thread is not None:
-            self._animation_thread.join()
+        if self._animation_timeout is not None:
+            gobject.source_remove(self._animation_timeout)
+            self._prev_delay = -1
+            self._animation = None
+            self._animation_timeout = None
 
-    def animation_thread(self):
-        while True:
-            with self._lock:
-                if self._animation is None:
-                    return
-                if self.get_window() is None: ##
-                    return
-                self._animation.advance()
-                delay = self._animation.get_delay_time()
-                self.screen.queue_draw()
+    def animation_step(self):
+        if self._animation is None or self.get_window() is None:
+            self._animation_timeout = None
+            return False
 
-            if delay < 0:
-                return
+        self._animation.advance()
+        self.screen.queue_draw()
 
-            delay = min(self.MAX_ANIMATION_DELAY,
-                        max(self.MIN_ANIMATION_DELAY, delay / 1000))
-            sleep(delay)
+        delay = self._animation.get_delay_time()
+        if delay < 0:
+            self._animation_timeout = None
+            return False
+        delay = max(self.MIN_ANIMATION_DELAY, delay)
+        #print(delay, self._prev_delay)
+        if abs(delay - self._prev_delay) < 10:
+            return True
+
+        self._prev_delay = delay
+        self._animation_timeout = gobject.timeout_add(
+            delay,
+            self.animation_step
+        )
+        return False
 
     def render(self, ctx):
-
         img = self.image
 
         if img is None:
@@ -526,8 +533,7 @@ class ImageWindow(DrawingWindow):
             return
 
         if isinstance(img, PixbufAnimation):
-            with self._lock:
-                img = self._animation.get_pixbuf()
+            img = self._animation.get_pixbuf()
 
         if isinstance(img, Pixbuf):
             cairo_set_source_pixbuf(ctx, img, 0, 0)
