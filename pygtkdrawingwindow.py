@@ -175,6 +175,10 @@ class DrawingWindow(gtk.ScrolledWindow):
         else:
             self.screen.connect('draw', self.draw_event)
 
+    def queue_draw(self):
+        super(DrawingWindow, self).queue_draw()
+        self.screen.queue_draw()
+
     @property
     def scale(self):
         return self._scale
