@@ -15,7 +15,7 @@ generated-members=
 
 [BASIC]
 
-good-names=i,j,k,x,y,z,m,s,db,fp,ex,Run,_,gtk_image_new_from_file,gtk_image_new_from_stock,cairo_set_source_pixbuf,rsvg_handle_new_from_file,ImageType,PolicyType,ScrollDirection,rsvg,izip
+good-names=i,j,k,x,y,z,db,fp,ex,Run,_,gtk_image_new_from_file,gtk_image_new_from_stock,cairo_set_source_pixbuf,rsvg_handle_new_from_file,ImageType,PolicyType,ScrollDirection,IconSize,rsvg,izip,xrange,up
 
 
 [FORMAT]
