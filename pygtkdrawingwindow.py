@@ -37,7 +37,7 @@ try:
     PYGTK = True
 except ImportError:
     from gi.repository import Gtk as gtk, Gdk as gdk, GLib as glib
-    from gi.repository.Gtk import ImageType, PolicyType
+    from gi.repository.Gtk import ImageType, PolicyType, IconSize
     from gi.repository.Gdk import ScrollDirection
     from gi.repository.GdkPixbuf import Pixbuf, PixbufAnimation
 
@@ -91,6 +91,9 @@ if PYGTK:
         LEFT=gdk.SCROLL_LEFT,
         RIGHT=gdk.SCROLL_RIGHT,
         SMOOTH=None
+    )
+    IconSize = Namespace(
+        DIALOG=gtk.ICON_SIZE_DIALOG
     )
 else:
     gtk_image_new_from_file = gtk.Image.new_from_file
@@ -529,7 +532,7 @@ class ImageWindow(DrawingWindow):
             return
 
         self.image = gtk_image_new_from_stock(gtk.STOCK_MISSING_IMAGE,
-                                              gtk.ICON_SIZE_DIALOG)
+                                              gtk.IconSize.DIALOG)
         raise ValueError('Invalid image: ' + str(img))
 
 
