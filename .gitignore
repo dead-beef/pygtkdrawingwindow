@@ -1,7 +1,6 @@
 /env
 /build
 /dist
-/README.rst
 /docsrc/_build
 /docsrc/source
 /*.egg-info
