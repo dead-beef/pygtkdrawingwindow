@@ -38,7 +38,7 @@ setup(
     license='MIT',
     py_modules=['pygtkdrawingwindow'],
     test_suite='setup.tests',
-    install_requires=[],
+    install_requires=['enum34'],
     extras_require={
         'dev': [
             'sphinx',

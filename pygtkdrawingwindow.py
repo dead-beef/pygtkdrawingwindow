@@ -2,8 +2,8 @@ from __future__ import division, print_function
 
 import sys
 
-from argparse import Namespace
 from contextlib import contextmanager
+from enum import IntEnum
 
 import cairo
 
@@ -57,7 +57,6 @@ except ImportError:
 
 from math import ceil, sin, cos
 from itertools import product
-from time import sleep
 
 try:
     from itertools import izip
@@ -76,30 +75,30 @@ if PYGTK:
     cairo_set_source_pixbuf = gdk.CairoContext.set_source_pixbuf
     rsvg_handle_new_from_file = rsvg.Handle
 
-    ImageType = Namespace(
-        EMPTY=gtk.IMAGE_EMPTY,
-        PIXBUF=gtk.IMAGE_PIXBUF,
-        ANIMATION=gtk.IMAGE_ANIMATION,
-        IMAGE=gtk.IMAGE_IMAGE,
-        PIXMAP=gtk.IMAGE_PIXMAP,
-        STOCK=gtk.IMAGE_STOCK,
-        ICON_SET=gtk.IMAGE_ICON_SET
-    )
-    PolicyType = Namespace(
-        ALWAYS=gtk.POLICY_ALWAYS,
-        AUTOMATIC=gtk.POLICY_AUTOMATIC,
-        NEVER=gtk.POLICY_NEVER
-    )
-    ScrollDirection = Namespace(
-        UP=gdk.SCROLL_UP,
-        DOWN=gdk.SCROLL_DOWN,
-        LEFT=gdk.SCROLL_LEFT,
-        RIGHT=gdk.SCROLL_RIGHT,
-        SMOOTH=None
-    )
-    IconSize = Namespace(
-        DIALOG=gtk.ICON_SIZE_DIALOG
-    )
+    class ImageType(IntEnum): # pylint:disable=function-redefined
+        EMPTY = gtk.IMAGE_EMPTY
+        PIXBUF = gtk.IMAGE_PIXBUF
+        ANIMATION = gtk.IMAGE_ANIMATION
+        IMAGE = gtk.IMAGE_IMAGE
+        PIXMAP = gtk.IMAGE_PIXMAP
+        STOCK = gtk.IMAGE_STOCK
+        ICON_SET = gtk.IMAGE_ICON_SET
+
+    class PolicyType(IntEnum): # pylint:disable=function-redefined
+        ALWAYS = gtk.POLICY_ALWAYS
+        AUTOMATIC = gtk.POLICY_AUTOMATIC
+        NEVER = gtk.POLICY_NEVER
+
+    class ScrollDirection(IntEnum): # pylint:disable=function-redefined
+        UP = gdk.SCROLL_UP
+        DOWN = gdk.SCROLL_DOWN
+        LEFT = gdk.SCROLL_LEFT
+        RIGHT = gdk.SCROLL_RIGHT
+        SMOOTH = -1
+
+    class IconSize(IntEnum): # pylint:disable=function-redefined
+        DIALOG = gtk.ICON_SIZE_DIALOG
+
 else:
     gtk_image_new_from_file = gtk.Image.new_from_file
     gtk_image_new_from_stock = gtk.Image.new_from_stock
@@ -107,15 +106,16 @@ else:
     rsvg_handle_new_from_file = rsvg.Handle.new_from_file
 
 
-class DrawingWindow(gtk.ScrolledWindow):
-
-    FIT_LAST = -1
-    FIT_NONE = 0
+class FitType(IntEnum):
+    LAST = -1
+    NONE = 0
     FIT = 1
-    FIT_WIDTH = 2
-    FIT_HEIGHT = 3
+    WIDTH = 2
+    HEIGHT = 3
     FIT_OR_1TO1 = 4
 
+
+class DrawingWindow(gtk.ScrolledWindow):
     if PYGTK:
         POLICY = gtk.POLICY_AUTOMATIC
         SHADOW = gtk.SHADOW_NONE
@@ -136,7 +136,7 @@ class DrawingWindow(gtk.ScrolledWindow):
         BUTTON_MASK = gdk.ModifierType.BUTTON2_MASK \
                       | gdk.ModifierType.BUTTON1_MASK
 
-    def __init__(self, fit=FIT_OR_1TO1, draw=None):
+    def __init__(self, fit=FitType.FIT_OR_1TO1, draw=None):
         super(DrawingWindow, self).__init__()
 
         self.set_policy(self.POLICY, self.POLICY)
@@ -350,12 +350,19 @@ class DrawingWindow(gtk.ScrolledWindow):
             self.zoom_out()
         return True
 
+    def queue_draw(self):
+        #super(DrawingWindow, self).queue_draw()
+        self.screen.queue_draw()
+
+    def update_fit(self):
+        self._do_fit()
+
     def zoom_in(self, *_):
-        self.fit = self.FIT_NONE
+        self.fit = FitType.NONE
         self.scale *= 1.1
 
     def zoom_out(self, *_):
-        self.fit = self.FIT_NONE
+        self.fit = FitType.NONE
         self.scale *= 0.9
 
     def zoom_fit_or_1to1(self, *_):
@@ -364,7 +371,7 @@ class DrawingWindow(gtk.ScrolledWindow):
         else:
             self.zoom_fit()
 
-        self.fit = self.FIT_OR_1TO1
+        self.fit = FitType.FIT_OR_1TO1
 
     def zoom_fit(self, *_):
         img_width, img_height = self.size
@@ -377,7 +384,7 @@ class DrawingWindow(gtk.ScrolledWindow):
         else:
             self.zoom_fit_height()
 
-        self.fit = self.FIT
+        self.fit = FitType.FIT
 
     def zoom_fit_width(self, *_):
         img_width, img_height = self.size
@@ -399,7 +406,7 @@ class DrawingWindow(gtk.ScrolledWindow):
             scale /= img_width
 
         self.scale = scale
-        self.fit = self.FIT_WIDTH
+        self.fit = FitType.WIDTH
 
     def zoom_fit_height(self, *_):
         img_width, img_height = self.size
@@ -422,7 +429,7 @@ class DrawingWindow(gtk.ScrolledWindow):
             scale /= img_height
 
         self.scale = scale
-        self.fit = self.FIT_HEIGHT
+        self.fit = FitType.HEIGHT
 
     def render(self, ctx):
         if self.draw_func is not None:
@@ -441,7 +448,7 @@ class ImageWindow(DrawingWindow):
     def __init__(self,
                  image=None,
                  image_filter=cairo.FILTER_NEAREST,
-                 new_image_fit=DrawingWindow.FIT_OR_1TO1):
+                 new_image_fit=FitType.FIT_OR_1TO1):
         super(ImageWindow, self).__init__()
 
         self._image = None
@@ -475,7 +482,7 @@ class ImageWindow(DrawingWindow):
         self.rotate = 0.0
         self.scale = 1.0
 
-        if self.new_image_fit != self.FIT_LAST:
+        if self.new_image_fit != FitType.LAST:
             self.fit = self.new_image_fit
 
         self.queue_draw()
@@ -542,7 +549,7 @@ class ImageWindow(DrawingWindow):
             return
 
         self.image = gtk_image_new_from_stock(gtk.STOCK_MISSING_IMAGE,
-                                              gtk.IconSize.DIALOG)
+                                              IconSize.DIALOG)
         raise ValueError('Invalid image: ' + str(img))
 
 
@@ -573,7 +580,7 @@ def get_scroll_direction(event):
     return event.direction
 
 def get_pixbuf_size(pixbuf):
-    return (pixbuf.get_width(), pixbuf.get_height())
+    return pixbuf.get_width(), pixbuf.get_height()
 
 def get_gtk_image_size(img):
     dtype = img.get_storage_type()
