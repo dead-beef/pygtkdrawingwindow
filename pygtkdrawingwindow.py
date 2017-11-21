@@ -2,6 +2,7 @@ from __future__ import division, print_function
 
 import sys
 
+from time import time
 from contextlib import contextmanager
 from enum import IntEnum
 
@@ -28,16 +29,18 @@ try:
     import gobject
     import gtk
     from gtk import gdk
-    from gtk.gdk import Pixbuf, PixbufAnimation
+    from gtk.gdk import Pixbuf, PixbufAnimation # pylint:disable=import-error
+
+    TimeVal = None
 
     try:
-        import rsvg
+        import rsvg # pylint:disable=import-error
     except ImportError:
         rsvg = NoRsvg
 
     PYGTK = True
 except ImportError:
-    from gi.repository import (
+    from gi.repository import ( # pylint:disable=no-name-in-module
         Gtk as gtk,
         Gdk as gdk,
         GLib as glib,
@@ -46,6 +49,11 @@ except ImportError:
     from gi.repository.Gtk import ImageType, PolicyType, IconSize
     from gi.repository.Gdk import ScrollDirection
     from gi.repository.GdkPixbuf import Pixbuf, PixbufAnimation
+
+    try:
+        from gi.repository.GLib import TimeVal # pylint:disable=import-error,no-name-in-module
+    except ImportError:
+        TimeVal = None
 
     try:
         from gi.repository import Rsvg as rsvg
@@ -453,6 +461,7 @@ class ImageWindow(DrawingWindow):
 
         self._image = None
         self._animation_timeout = None
+        self._animation_time = None
         self._animation = None
         self._prev_delay = -1
 
@@ -461,10 +470,11 @@ class ImageWindow(DrawingWindow):
 
         self.image = image
 
-        #self.screen.add_events(gdk.STRUCTURE_MASK)
-        self.screen.connect('map_event', print_('map', self.animate))
-        self.screen.connect('unmap_event', print_('unmap', self.stop))
-        self.screen.connect('destroy', print_('destroy', self.stop))
+        start = ignore_args(self.start_animation)
+        stop = ignore_args(self.stop_animation)
+        self.screen.connect('map_event', print_('map', start))
+        self.screen.connect('unmap_event', print_('unmap', stop))
+        self.screen.connect('destroy', print_('destroy', stop))
 
     @property
     def image(self):
@@ -472,7 +482,7 @@ class ImageWindow(DrawingWindow):
 
     @image.setter
     def image(self, img):
-        self.stop()
+        self.stop_animation()
 
         img = load_image(img, self)
         size = get_image_size(img)
@@ -482,28 +492,52 @@ class ImageWindow(DrawingWindow):
         self.rotate = 0.0
         self.scale = 1.0
 
+        self.reset_animation()
         if self.new_image_fit != FitType.LAST:
             self.fit = self.new_image_fit
 
         self.queue_draw()
-        self.animate()
+        self.start_animation()
 
-    def animate(self, *_):
-        self.stop()
-        if isinstance(self.image, PixbufAnimation):
-            self._prev_delay = -1
+    def start_animation(self):
+        if not self.has_animation():
+            return
+        self.stop_animation()
+        self._prev_delay = -1
+        start_time = time()
+        if self._animation_time is not None:
+            start = get_timeval(start_time - self._animation_time)
+            self._animation = self.image.get_iter(start)
+        self._animation_time = start_time
+        self._animation_timeout = gobject.idle_add(self.animation_step)
+
+    def stop_animation(self):
+        if not self.get_animation():
+            return
+        gobject.source_remove(self._animation_timeout)
+        self._prev_delay = -1
+        self._animation_time = time() - self._animation_time
+        self._animation_timeout = None
+
+    def reset_animation(self):
+        if self.has_animation():
             self._animation = self.image.get_iter()
-            self._animation_timeout = gobject.timeout_add(
-                0,
-                self.animation_step
-            )
-
-    def stop(self, *_):
-        if self._animation_timeout is not None:
-            gobject.source_remove(self._animation_timeout)
-            self._prev_delay = -1
+            self._animation_time = time()
+        else:
             self._animation = None
-            self._animation_timeout = None
+            self._animation_time = None
+
+    def has_animation(self):
+        return isinstance(self.image, PixbufAnimation)
+
+    def get_animation(self):
+        return self._animation_timeout is not None
+
+    def set_animation(self, enable):
+        if enable:
+            self.start_animation()
+        else:
+            self.stop_animation()
 
     def animation_step(self):
         if self._animation is None or self.get_window() is None:
@@ -562,6 +596,9 @@ def print_(msg, func):
         return func(*args, **kwargs)
     return ret
 
+def ignore_args(func):
+    return lambda *_: func()
+
 @contextmanager
 def freeze(widget):
     window = widget.get_window()
@@ -578,6 +615,13 @@ def get_scroll_direction(event):
         if event.delta_y > 0.01:
             return ScrollDirection.DOWN
     return event.direction
+
+def get_timeval(time_):
+    if TimeVal is None:
+        return time_
+    ret = TimeVal()
+    ret.add(int(time_ * 1e6))
+    return ret
 
 def get_pixbuf_size(pixbuf):
     return pixbuf.get_width(), pixbuf.get_height()
