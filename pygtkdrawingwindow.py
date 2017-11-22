@@ -150,7 +150,7 @@ class DrawingWindow(gtk.ScrolledWindow):
         BUTTON_MASK = gdk.ModifierType.BUTTON2_MASK \
                       | gdk.ModifierType.BUTTON1_MASK
 
-    def __init__(self, fit=FitType.FIT_OR_1TO1, draw=None):
+    def __init__(self):
         super(DrawingWindow, self).__init__()
 
         self.set_policy(self.POLICY, self.POLICY)
@@ -164,26 +164,26 @@ class DrawingWindow(gtk.ScrolledWindow):
         self._prev_scale = None
         self._size = (0, 0)
         self._scale = None
+        self._fit = None
+        self._do_fit = None
         self._rotate = 0.0
 
-        self._fit = (
+        self._do_fit_funcs = (
             nop,
             self.zoom_fit,
             self.zoom_fit_width,
             self.zoom_fit_height,
             self.zoom_fit_or_1to1
         )
-        self.fit = fit
-
-        self.draw_func = draw
 
         self.pointer = None
         self.pointer_root = None
 
-        self.scale = 1.0
+        self.set_zoom(1.0)
+        self.set_fit(FitType.FIT_OR_1TO1)
 
         self.screen.set_events(self.EVENTS)
-        self.connect('size_allocate', self.update_fit)
+        self.connect('size_allocate', ignore_args(self.update_fit))
         self.connect('scroll_event', self.scroll_event)
         self.screen.connect('size_allocate', self.size_allocate_event)
         self.screen.connect('motion_notify_event', self.motion_notify_event)
@@ -193,32 +193,34 @@ class DrawingWindow(gtk.ScrolledWindow):
         else:
             self.screen.connect('draw', self.draw_event)
 
-    def queue_draw(self):
-        super(DrawingWindow, self).queue_draw()
-        self.screen.queue_draw()
+    def get_fit(self):
+        return self._fit
 
-    @property
-    def scale(self):
+    def set_fit(self, fit):
+        try:
+            self._do_fit = self._do_fit_funcs[fit]
+        except IndexError:
+            raise ValueError('Invalid fit type: %s' % repr(fit))
+        self._fit = fit
+
+    def get_zoom(self):
         return self._scale
 
-    @scale.setter
-    def scale(self, scale):
-        self.screen.set_size_request(*(int(sz * scale) for sz in self.size))
+    def set_zoom(self, ratio):
         if self._prev_scale is None:
             self._prev_scale = self._scale
-        self._scale = scale
+        self._scale = ratio
+        self._update_screen_size()
 
-    @property
-    def rotate(self):
+    def get_angle(self):
         return self._rotate
 
-    @rotate.setter
-    def rotate(self, rotate):
-        width, height = self.size
+    def set_angle(self, angle):
+        width, height = self.get_size()
         width /= 2
         height /= 2
         rect = list(product((-width, width), (-height, height)))
-        sin_, cos_ = sin(rotate), cos(rotate)
+        sin_, cos_ = sin(angle), cos(angle)
         for i, point in enumerate(rect):
             x, y = point
             rect[i] = (
@@ -227,32 +229,39 @@ class DrawingWindow(gtk.ScrolledWindow):
             )
         width = max(x for x, _ in rect) - min(x for x, _ in rect)
         height = max(y for _, y in rect) - min(y for _, y in rect)
+        scale = self.get_zoom()
         self.screen.set_size_request(
-            int(ceil(width * self.scale)),
-            int(ceil(height * self.scale))
+            int(ceil(width * scale)),
+            int(ceil(height * scale))
         )
         self.screen.queue_draw()
-        self._rotate = rotate
+        self._rotate = angle
 
-    @property
-    def size(self):
+    def get_size(self):
         return self._size
 
-    @size.setter
-    def size(self, size):
+    def set_size(self, size):
         self._size = size
-        self.scale = self.scale
+        self._update_screen_size()
 
-    @property
-    def window_size(self):
+    def get_window_size(self):
         rect = self.get_allocation()
         return rect.width, rect.height
+
+    def get_screen_size(self):
+        rect = self.screen.get_allocation()
+        return rect.width, rect.height
+
+    def _update_screen_size(self):
+        self.screen.set_size_request(
+            *(int(sz * self.get_zoom()) for sz in self.get_size())
+        )
 
     def _zoom_scroll(self):
         if self._prev_scale is None:
             return
 
-        dscale = self.scale / self._prev_scale
+        dscale = self.get_zoom() / self._prev_scale
 
         scrollbars = (self.get_hscrollbar(), self.get_vscrollbar())
         scrollbar_sizes = (
@@ -267,7 +276,7 @@ class DrawingWindow(gtk.ScrolledWindow):
             pointer = tuple(
                 sb.get_value() + (wnd_size - sb_size) / 2
                 for sb, sb_size, wnd_size
-                in izip(scrollbars, scrollbar_sizes, self.window_size)
+                in izip(scrollbars, scrollbar_sizes, self.get_window_size())
             )
         else:
             pointer = self.pointer
@@ -280,13 +289,6 @@ class DrawingWindow(gtk.ScrolledWindow):
             scrollbar.set_value(value)
 
         self._prev_scale = None
-
-    def update_fit(self, *_):
-        try:
-            self._fit[self.fit]()
-        except IndexError:
-            self.fit = self.FIT_NONE
-            raise
 
     def size_allocate_event(self, *_):
         with freeze(self.screen):
@@ -301,18 +303,18 @@ class DrawingWindow(gtk.ScrolledWindow):
         self.draw_event(None, ctx)
 
     def draw_event(self, _, ctx):
-        width, height = self.size
+        size = self.get_size()
+        scale = self.get_zoom()
+        width, height = size
         width *= 0.5
         height *= 0.5
-        size = self.screen.get_allocation()
-        size = (size.width, size.height)
-        off = [max(0, (wnd_size - img_size * self.scale) / 2)
-               for wnd_size, img_size in izip(size, self.size)]
+        off = [max(0, (wnd_size - img_size * scale) / 2)
+               for wnd_size, img_size in izip(self.get_screen_size(), size)]
 
         ctx.translate(*off)
-        ctx.scale(self.scale, self.scale)
+        ctx.scale(scale, scale)
         ctx.translate(width, height)
-        ctx.rotate(self.rotate)
+        ctx.rotate(self.get_angle())
         ctx.translate(-width, -height)
 
         self.emit('render', ctx)
@@ -363,40 +365,42 @@ class DrawingWindow(gtk.ScrolledWindow):
     def update_fit(self):
         self._do_fit()
 
-    def zoom_in(self, *_):
-        self.fit = FitType.NONE
-        self.scale *= 1.1
+    def zoom_in(self):
+        self.set_fit(FitType.NONE)
+        self.set_zoom(self.get_zoom() * 1.1)
 
-    def zoom_out(self, *_):
-        self.fit = FitType.NONE
-        self.scale *= 0.9
+    def zoom_out(self):
+        self.set_fit(FitType.NONE)
+        self.set_zoom(self.get_zoom() * 0.9)
 
-    def zoom_fit_or_1to1(self, *_):
-        if all(size < wnd for size, wnd in izip(self.size, self.window_size)):
-            self.scale = 1
+    def zoom_fit_or_1to1(self):
+        if all(size < wnd
+               for size, wnd
+               in izip(self.get_size(), self.get_window_size())):
+            self.set_zoom(1)
         else:
             self.zoom_fit()
 
-        self.fit = FitType.FIT_OR_1TO1
+        self.set_fit(FitType.FIT_OR_1TO1)
 
-    def zoom_fit(self, *_):
-        img_width, img_height = self.size
+    def zoom_fit(self):
+        img_width, img_height = self.get_size()
         if img_width == 0 or img_height == 0:
             return
-        width, height = self.window_size
+        width, height = self.get_window_size()
 
         if width / img_width < height / img_height:
             self.zoom_fit_width()
         else:
             self.zoom_fit_height()
 
-        self.fit = FitType.FIT
+        self.set_fit(FitType.FIT)
 
-    def zoom_fit_width(self, *_):
-        img_width, img_height = self.size
+    def zoom_fit_width(self):
+        img_width, img_height = self.get_size()
         if img_width == 0 or img_height == 0:
             return
-        width, height = self.window_size
+        width, height = self.get_window_size()
 
         _, policy = self.get_policy()
 
@@ -411,15 +415,15 @@ class DrawingWindow(gtk.ScrolledWindow):
             scale = width - self._scrollbar_size - self._fit_offset
             scale /= img_width
 
-        self.scale = scale
-        self.fit = FitType.WIDTH
+        self.set_zoom(scale)
+        self.set_fit(FitType.WIDTH)
 
-    def zoom_fit_height(self, *_):
-        img_width, img_height = self.size
+    def zoom_fit_height(self):
+        img_width, img_height = self.get_size()
         if img_width == 0 or img_height == 0:
             return
 
-        width, height = self.window_size
+        width, height = self.get_window_size()
 
         policy, _ = self.get_policy()
 
@@ -434,12 +438,8 @@ class DrawingWindow(gtk.ScrolledWindow):
             scale = height - self._scrollbar_size - self._fit_offset
             scale /= img_height
 
-        self.scale = scale
-        self.fit = FitType.HEIGHT
-
-    def do_render(self, ctx):
-        if self.draw_func is not None:
-            self.draw_func(ctx)
+        self.set_zoom(scale)
+        self.set_fit(FitType.HEIGHT)
 
 
 class ImageWindow(DrawingWindow):
@@ -451,10 +451,7 @@ class ImageWindow(DrawingWindow):
     else:
         EVENTS = DrawingWindow.EVENTS | gdk.EventMask.STRUCTURE_MASK
 
-    def __init__(self,
-                 image=None,
-                 image_filter=cairo.FILTER_NEAREST,
-                 new_image_fit=FitType.FIT_OR_1TO1):
+    def __init__(self):
         super(ImageWindow, self).__init__()
 
         self._image = None
@@ -463,10 +460,8 @@ class ImageWindow(DrawingWindow):
         self._animation = None
         self._prev_delay = -1
 
-        self.image_filter = image_filter
-        self.new_image_fit = new_image_fit
-
-        self.image = image
+        self.image_filter = cairo.FILTER_NEAREST
+        self.new_image_fit = FitType.FIT_OR_1TO1
 
         start = ignore_args(self.start_animation)
         stop = ignore_args(self.stop_animation)
@@ -474,25 +469,21 @@ class ImageWindow(DrawingWindow):
         self.screen.connect('unmap_event', print_('unmap', stop))
         self.screen.connect('destroy', print_('destroy', stop))
 
-    @property
-    def image(self):
+    def get_image(self):
         return self._image
 
-    @image.setter
-    def image(self, img):
+    def set_image(self, img):
         self.stop_animation()
 
         img = load_image(img, self)
         size = get_image_size(img)
         self._image = img
-        self.size = size
-
-        self.rotate = 0.0
-        self.scale = 1.0
-
+        self.set_size(size)
         self.reset_animation()
+        self.set_angle(0.0)
+        self.set_zoom(1.0)
         if self.new_image_fit != FitType.LAST:
-            self.fit = self.new_image_fit
+            self.set_fit(self.new_image_fit)
 
         self.queue_draw()
         self.start_animation()
@@ -505,7 +496,7 @@ class ImageWindow(DrawingWindow):
         start_time = time()
         if self._animation_time is not None:
             start = get_timeval(start_time - self._animation_time)
-            self._animation = self.image.get_iter(start)
+            self._animation = self.get_image().get_iter(start)
         self._animation_time = start_time
         self._animation_timeout = gobject.idle_add(self.animation_step)
 
@@ -519,14 +510,14 @@ class ImageWindow(DrawingWindow):
 
     def reset_animation(self):
         if self.has_animation():
-            self._animation = self.image.get_iter()
+            self._animation = self.get_image().get_iter()
             self._animation_time = time()
         else:
             self._animation = None
             self._animation_time = None
 
     def has_animation(self):
-        return isinstance(self.image, PixbufAnimation)
+        return isinstance(self.get_image(), PixbufAnimation)
 
     def get_animation(self):
         return self._animation_timeout is not None
@@ -562,7 +553,7 @@ class ImageWindow(DrawingWindow):
         return False
 
     def do_render(self, ctx):
-        img = self.image
+        img = self.get_image()
 
         if img is None:
             return
@@ -580,8 +571,8 @@ class ImageWindow(DrawingWindow):
             ctx.paint()
             return
 
-        self.image = gtk_image_new_from_stock(gtk.STOCK_MISSING_IMAGE,
-                                              IconSize.DIALOG)
+        err = gtk_image_new_from_stock(gtk.STOCK_MISSING_IMAGE, IconSize.DIALOG)
+        self.set_image(err)
         raise ValueError('Invalid image: ' + str(img))
 
 
