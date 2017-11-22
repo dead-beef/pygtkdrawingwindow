@@ -124,6 +124,12 @@ class FitType(IntEnum):
 
 
 class DrawingWindow(gtk.ScrolledWindow):
+    __gsignals__ = {
+        'render': (gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT,))
+    }
+
     if PYGTK:
         POLICY = gtk.POLICY_AUTOMATIC
         SHADOW = gtk.SHADOW_NONE
@@ -314,8 +320,8 @@ class DrawingWindow(gtk.ScrolledWindow):
         ctx.rotate(self.rotate)
         ctx.translate(-width, -height)
 
-        self.render(ctx)
         #ctx.restore()
+        self.emit('render', ctx)
 
     def leave_notify_event(self, *_):
         self.pointer = None
@@ -439,7 +445,7 @@ class DrawingWindow(gtk.ScrolledWindow):
         self.scale = scale
         self.fit = FitType.HEIGHT
 
-    def render(self, ctx):
+    def do_render(self, ctx):
         if self.draw_func is not None:
             self.draw_func(ctx)
 
@@ -563,7 +569,7 @@ class ImageWindow(DrawingWindow):
         )
         return False
 
-    def render(self, ctx):
+    def do_render(self, ctx):
         img = self.image
 
         if img is None:
@@ -715,3 +721,7 @@ def load_image(img, widget=None):
         img = img.get_static_image()
 
     return img
+
+
+gobject.type_register(DrawingWindow)
+gobject.type_register(ImageWindow)
