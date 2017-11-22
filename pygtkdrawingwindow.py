@@ -183,7 +183,6 @@ class DrawingWindow(gtk.ScrolledWindow):
         self.scale = 1.0
 
         self.screen.set_events(self.EVENTS)
-        #self.screen.set_double_buffered(False)
         self.connect('size_allocate', self.update_fit)
         self.connect('scroll_event', self.scroll_event)
         self.screen.connect('size_allocate', self.size_allocate_event)
@@ -277,9 +276,7 @@ class DrawingWindow(gtk.ScrolledWindow):
         dscale -= 1
 
         for x, scrollbar in izip(pointer, scrollbars):
-            #adj = scrollbar.get_adjustment()
             value = scrollbar.get_value() + dscale * x
-            #value = min(adj.get_upper(), max(adj.get_lower(), value))
             scrollbar.set_value(value)
 
         self._prev_scale = None
@@ -312,15 +309,12 @@ class DrawingWindow(gtk.ScrolledWindow):
         off = [max(0, (wnd_size - img_size * self.scale) / 2)
                for wnd_size, img_size in izip(size, self.size)]
 
-        #ctx.identity_matrix()
-        #ctx.save()
         ctx.translate(*off)
         ctx.scale(self.scale, self.scale)
         ctx.translate(width, height)
         ctx.rotate(self.rotate)
         ctx.translate(-width, -height)
 
-        #ctx.restore()
         self.emit('render', ctx)
 
     def leave_notify_event(self, *_):
@@ -341,9 +335,7 @@ class DrawingWindow(gtk.ScrolledWindow):
             scrollbars = (self.get_hscrollbar(), self.get_vscrollbar())
             scrollbars = izip(pointer, self.pointer_root, scrollbars)
             for cur, prev, scrollbar in scrollbars:
-                #adj = scrollbar.get_adjustment()
                 value = scrollbar.get_value() + (prev - cur)
-                #value = min(adj.get_upper(), max(adj.get_lower(), value))
                 scrollbar.set_value(value)
             ret = True
 
