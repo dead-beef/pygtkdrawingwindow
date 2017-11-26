@@ -24,3 +24,7 @@ max-parents=8
 [FORMAT]
 
 max-line-length=80
+
+[VARIABLES]
+
+dummy-variables-rgx=^(args|kw|ev|)_$
