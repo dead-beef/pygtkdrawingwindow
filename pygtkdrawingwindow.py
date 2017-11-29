@@ -3,6 +3,7 @@ from __future__ import division, print_function
 import sys
 
 from time import time
+from functools import wraps
 from contextlib import contextmanager
 from enum import IntEnum
 
@@ -465,9 +466,9 @@ class ImageWindow(DrawingWindow):
 
         start = ignore_args(self.start_animation)
         stop = ignore_args(self.stop_animation)
-        self.screen.connect('map_event', print_('map', start))
-        self.screen.connect('unmap_event', print_('unmap', stop))
-        self.screen.connect('destroy', print_('destroy', stop))
+        self.screen.connect('map_event', log('map')(start))
+        self.screen.connect('unmap_event', log('unmap')(stop))
+        self.screen.connect('destroy', log('destroy')(stop))
 
     def get_image(self):
         return self._image
@@ -579,14 +580,20 @@ class ImageWindow(DrawingWindow):
 def nop(*_):
     pass
 
-def print_(msg, func):
-    def ret(*args, **kwargs):
-        print(msg)
-        return func(*args, **kwargs)
-    return ret
+def log(msg):
+    def decorator(func):
+        @wraps(func)
+        def ret(*args, **kwargs):
+            print(msg)
+            return func(*args, **kwargs)
+        return ret
+    return decorator
 
 def ignore_args(func):
-    return lambda *_: func()
+    @wraps(func)
+    def ret(*_, **kw_):
+        return func()
+    return ret
 
 @contextmanager
 def freeze(widget):
