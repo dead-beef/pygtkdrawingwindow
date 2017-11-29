@@ -11,90 +11,43 @@ except ImportError:
     from gi.repository import Gtk as gtk # pylint:disable=no-name-in-module
     PYGTK = False
 
-import sys
-from math import ceil, floor
-
-from pygtkdrawingwindow import ImageWindow, ignore_args
+from pygtkdrawingwindow import DrawingWindow, ignore_args
 
 
 if PYGTK:
-    gtk_image_new_from_stock = gtk.image_new_from_stock
-    ICON_SIZE = gtk.ICON_SIZE_MENU
     TOOLBAR_STYLE = gtk.TOOLBAR_BOTH
     WINDOW_POSITION = gtk.WIN_POS_CENTER
 else:
-    gtk_image_new_from_stock = gtk.Image.new_from_stock
-    ICON_SIZE = gtk.IconSize.MENU
     TOOLBAR_STYLE = gtk.ToolbarStyle.BOTH
     WINDOW_POSITION = gtk.WindowPosition.CENTER
 
-try:
-    xrange
-except NameError:
-    xrange = range # pylint:disable=redefined-builtin
 
-
-def toolbutton(icon, label, onclick, sensitive=True):
+def toolbutton(icon, label, onclick):
     btn = gtk.ToolButton(icon_widget=None, label=label)
     btn.set_stock_id(icon)
-    if isinstance(onclick, tuple):
-        btn.connect('clicked', *onclick)
-    else:
-        btn.connect('clicked', ignore_args(onclick))
-    btn.set_sensitive(sensitive)
+    btn.connect('clicked', ignore_args(onclick))
     return btn
 
-def draw_grid(widget, ctx):
-    zoom = widget.get_zoom()
-    #if zoom < 16.0:
-    #    return
-
+def draw(widget, ctx):
     width, height = widget.get_size()
-    left, up, right, down = ctx.clip_extents()
-    left = max(0, int(floor(left)))
-    right = min(width, int(ceil(right))) + 1
-    up = max(0, int(floor(up)))
-    down = min(height, int(ceil(down))) + 1
-
-    ctx.set_source_rgb(0.0, 0.0, 0.0)
-    ctx.set_line_width(0.5 / zoom)
-    for x in xrange(left, right):
-        ctx.move_to(x, up)
-        ctx.line_to(x, down)
-    for y in xrange(up, down):
-        ctx.move_to(left, y)
-        ctx.line_to(right, y)
+    ctx.set_source_rgb(1.0, 0.5, 1.0)
+    ctx.set_line_width(4)
+    ctx.rectangle(0, 0, width, height)
+    ctx.move_to(0, 0)
+    ctx.line_to(width, height)
+    ctx.move_to(width, 0)
+    ctx.line_to(0, height)
     ctx.stroke()
 
-def toggle_grid(_, img, grid):
-    if grid[0] is None:
-        grid[0] = img.connect('render', draw_grid)
-    else:
-        img.disconnect(grid[0])
-        grid[0] = None
-    img.queue_draw()
-
-def toggle_animation(btn, img):
-    state = not img.get_animation()
-    img.set_animation(state)
-    btn.set_stock_id(gtk.STOCK_MEDIA_PAUSE if state else gtk.STOCK_MEDIA_PLAY)
-    btn.queue_draw()
-
 def main():
-    if len(sys.argv) != 2:
-        print('Usage:', sys.argv[0], '<image>')
-        exit(1)
-
-    grid = [None]
-
     wnd = gtk.Window()
-    wnd.set_title('pygtkdrawingwindow demo')
-    wnd.set_default_size(1024, 600)
+    wnd.set_title('DrawingWindow')
+    wnd.set_default_size(800, 600)
     wnd.set_position(WINDOW_POSITION)
 
-    img = ImageWindow()
-    img.set_image(sys.argv[1])
-    #toggle_grid(None, img, grid)
+    img = DrawingWindow()
+    img.set_size(200, 200)
+    img.connect('render', draw)
 
     vbox = gtk.VBox()
     wnd.add(vbox)
@@ -108,10 +61,7 @@ def main():
         (gtk.STOCK_ZOOM_FIT, 'Fit', img.zoom_fit),
         (gtk.STOCK_ZOOM_FIT, 'Fit Width', img.zoom_fit_width),
         (gtk.STOCK_ZOOM_FIT, 'Fit Height', img.zoom_fit_height),
-        (gtk.STOCK_ZOOM_FIT, 'Fit or 1:1', img.zoom_fit_or_1to1),
-        (gtk.STOCK_SELECT_COLOR, 'Toggle Grid', (toggle_grid, img, grid)),
-        (gtk.STOCK_MEDIA_PAUSE if img.has_animation() else gtk.STOCK_MEDIA_PLAY,
-         'Toggle Animation', (toggle_animation, img), img.has_animation())
+        (gtk.STOCK_ZOOM_FIT, 'Fit or 1:1', img.zoom_fit_or_1to1)
     ]
 
     for btn in toolbuttons:
