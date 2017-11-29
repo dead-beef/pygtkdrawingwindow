@@ -240,8 +240,8 @@ class DrawingWindow(gtk.ScrolledWindow):
     def get_size(self):
         return self._size
 
-    def set_size(self, size):
-        self._size = size
+    def set_size(self, width, height):
+        self._size = (width, height)
         self._update_screen_size()
 
     def get_window_size(self):
@@ -476,9 +476,9 @@ class ImageWindow(DrawingWindow):
         self.stop_animation()
 
         img = load_image(img, self)
-        size = get_image_size(img)
+        width, height = get_image_size(img)
         self._image = img
-        self.set_size(size)
+        self.set_size(width, height)
         self.reset_animation()
         self.set_angle(0.0)
         self.set_zoom(1.0)
