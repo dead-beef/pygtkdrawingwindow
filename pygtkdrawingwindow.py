@@ -290,7 +290,7 @@ class DrawingWindow(gtk.ScrolledWindow):
 
         self._prev_scale = None
 
-    def size_allocate_event(self, *_):
+    def size_allocate_event(self, _, ev_):
         with freeze(self.screen):
             self._zoom_scroll()
             self.update_fit()
@@ -319,7 +319,7 @@ class DrawingWindow(gtk.ScrolledWindow):
 
         self.emit('render', ctx)
 
-    def leave_notify_event(self, *_):
+    def leave_notify_event(self, _, ev_):
         self.pointer = None
         self.pointer_root = None
         return False
