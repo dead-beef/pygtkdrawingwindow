@@ -593,9 +593,11 @@ def freeze(widget):
     window = widget.get_window()
     if window is not None:
         window.freeze_updates()
-    yield
-    if window is not None:
-        window.thaw_updates()
+    try:
+        yield
+    finally:
+        if window is not None:
+            window.thaw_updates()
 
 def get_scroll_direction(event):
     if event.direction == ScrollDirection.SMOOTH:
