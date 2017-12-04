@@ -11,7 +11,8 @@ except ImportError:
     from gi.repository import Gtk as gtk # pylint:disable=no-name-in-module
     PYGTK = False
 
-from pygtkdrawingwindow import DrawingWindow, ignore_args
+from pygtkdrawingwindow import DrawingWindow
+from pygtkdrawingwindow.util import ignore_args
 
 
 if PYGTK:

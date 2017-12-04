@@ -2,7 +2,7 @@
 
 import os
 from unittest import TestLoader
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def tests():
     return TestLoader().discover('tests')
@@ -36,7 +36,7 @@ setup(
     url='https://github.com/dead-beef/pygtkdrawingwindow',
     author='dead-beef',
     license='MIT',
-    py_modules=['pygtkdrawingwindow'],
+    packages=find_packages(include=('pygtkdrawingwindow*',)),
     test_suite='setup.tests',
     install_requires=['enum34'],
     extras_require={

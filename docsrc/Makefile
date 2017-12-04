@@ -17,7 +17,7 @@ $(HTML_DIR): | $(DISTDIR) $(BUILDDIR)
 	ln -s ../$(DISTDIR) $@
 
 apidoc:
-	sphinx-apidoc -o source/ ../ ../demo.py ../setup.py 
+	sphinx-apidoc -o source/ ../$(SPHINXPROJ)
 
 # Put it first so that "make" without argument is like "make help".
 help:

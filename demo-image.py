@@ -14,7 +14,8 @@ except ImportError:
 import sys
 from math import ceil, floor
 
-from pygtkdrawingwindow import ImageWindow, ignore_args
+from pygtkdrawingwindow import ImageWindow
+from pygtkdrawingwindow.util import ignore_args
 
 
 if PYGTK:
