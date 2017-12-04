@@ -32,9 +32,9 @@ Usage
 -----
 
 -  `DrawingWindow example
-   <https://github.com/dead-beef/pygtkdrawingwindowblob/master/demo.py>`__
+   <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/demo.py>`__
 -  `ImageWindow example
-   <https://github.com/dead-beef/pygtkdrawingwindowblob/blob/master/demo-image.py>`__
+   <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/demo-image.py>`__
 
 Development
 -----------
@@ -59,4 +59,4 @@ Licenses
 --------
 
 -  `pygtkdrawingwindow
-   <https://github.com/dead-beef/pygtkdrawingwindowblob/blob/master/LICENSE>`__
+   <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/LICENSE>`__
