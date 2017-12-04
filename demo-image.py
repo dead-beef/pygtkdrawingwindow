@@ -2,20 +2,12 @@
 
 from __future__ import print_function
 
-try:
-    import pygtk
-    pygtk.require('2.0')
-    import gtk
-    PYGTK = True
-except ImportError:
-    from gi.repository import Gtk as gtk # pylint:disable=no-name-in-module
-    PYGTK = False
-
 import sys
 from math import ceil, floor
 
-from pygtkdrawingwindow import ImageWindow
+from pygtkdrawingwindow.deps import PYGTK, gtk
 from pygtkdrawingwindow.util import ignore_args
+from pygtkdrawingwindow import ImageWindow
 
 
 if PYGTK:
