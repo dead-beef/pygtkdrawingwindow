@@ -1,6 +1,12 @@
 pygtkdrawingwindow
 ==================
 
+Overview
+--------
+
+`PyGTK <http://www.pygtk.org/>`__ / `PyGObject <https://lazka.github.io/pgi-docs/>`__
+drawing widgets.
+
 Requirements
 ------------
 
@@ -22,14 +28,35 @@ Installation
 
     python setup.py install
 
+Usage
+-----
+
+-  `DrawingWindow example
+   <https://github.com/dead-beef/pygtkdrawingwindowblob/master/demo.py>`__
+-  `ImageWindow example
+   <https://github.com/dead-beef/pygtkdrawingwindowblob/blob/master/demo-image.py>`__
+
+Development
+-----------
+
+Installation
+~~~~~~~~~~~~
+
 .. code:: bash
 
     git clone https://github.com/dead-beef/pygtkdrawingwindow
     cd pygtkdrawingwindow
     pip install -e .[dev]
 
+Building
+~~~~~~~~
+
+.. code:: bash
+
+    ./build.sh
+
 Licenses
 --------
 
--  `pygtkdrawingwindow <LICENSE>`__
-
+-  `pygtkdrawingwindow
+   <https://github.com/dead-beef/pygtkdrawingwindowblob/blob/master/LICENSE>`__
