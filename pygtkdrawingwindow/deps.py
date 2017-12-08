@@ -39,7 +39,7 @@ except ImportError:
     from gi.repository.GdkPixbuf import Pixbuf, PixbufAnimation
 
     try:
-        from gi.repository.GLib import TimeVal # pylint:disable=import-error,no-name-in-module
+        from gi.repository.GLib import TimeVal
     except ImportError:
         TimeVal = None
 
@@ -74,6 +74,7 @@ class NoRsvg(object):
             glib.GError
             """
             raise glib.GError('missing rsvg module')
+
         def __init__(self, *_):
             """Throw missing module error.
 
@@ -87,6 +88,7 @@ class NoRsvg(object):
             glib.GError
             """
             self.error()
+
         @classmethod
         def new_from_file(cls, *_):
             """Throw missing module error.

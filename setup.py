@@ -17,7 +17,7 @@ except IOError:
 setup(
     name='pygtkdrawingwindow',
     version='0.1.0',
-    description='',
+    description='PyGTK/PyGObject drawing widgets',
     long_description=README,
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -32,7 +32,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Software Development :: Widget Sets'
     ],
-    keywords='gtk',
+    keywords='gtk widget',
     url='https://github.com/dead-beef/pygtkdrawingwindow',
     author='dead-beef',
     license='MIT',
