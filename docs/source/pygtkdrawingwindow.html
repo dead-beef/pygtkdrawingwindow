@@ -1,0 +1,1373 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pygtkdrawingwindow package &mdash; pygtkdrawingwindow 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="pygtkdrawingwindow 0.1.0 documentation" href="../index.html"/>
+        <link rel="up" title="pygtkdrawingwindow" href="modules.html"/>
+        <link rel="prev" title="pygtkdrawingwindow" href="modules.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pygtkdrawingwindow
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    <a href="../index.html">
+        README
+    </a>
+    <a href="../genindex.html">
+        Index
+    </a>
+    
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pygtkdrawingwindow</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pygtkdrawingwindow package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pygtkdrawingwindow.base">pygtkdrawingwindow.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pygtkdrawingwindow.deps">pygtkdrawingwindow.deps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pygtkdrawingwindow.image">pygtkdrawingwindow.image module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pygtkdrawingwindow.util">pygtkdrawingwindow.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pygtkdrawingwindow">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pygtkdrawingwindow</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">pygtkdrawingwindow</a> &raquo;</li>
+        
+      <li>pygtkdrawingwindow package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/pygtkdrawingwindow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pygtkdrawingwindow-package">
+<h1>pygtkdrawingwindow package<a class="headerlink" href="#pygtkdrawingwindow-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pygtkdrawingwindow.base">
+<span id="pygtkdrawingwindow-base-module"></span><h2>pygtkdrawingwindow.base module<a class="headerlink" href="#module-pygtkdrawingwindow.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pygtkdrawingwindow.base.DrawingWindow">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.base.</code><code class="descname">DrawingWindow</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">gtk.ScrolledWindow</span></code></p>
+<p>Drawing widget.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.__gsignals__">
+<code class="descname">__gsignals__</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.__gsignals__" title="Permalink to this definition">¶</a></dt>
+<dd><p>GObject signals:</p>
+<dl class="docutils">
+<dt>render(widget <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference internal" href="#pygtkdrawingwindow.base.DrawingWindow" title="pygtkdrawingwindow.base.DrawingWindow"><code class="xref py py-obj docutils literal"><span class="pre">DrawingWindow</span></code></a>, ctx: <code class="xref py py-obj docutils literal"><span class="pre">cairo.Context</span></code>)</span></dt>
+<dd>Image draw signal.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.screen">
+<code class="descname">screen</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.screen" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">gtk.DrawingArea</span></code> – Drawing area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.pointer">
+<code class="descname">pointer</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.pointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) or None – Pointer coordinates on drawing area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.pointer_root">
+<code class="descname">pointer_root</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.pointer_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) or None – Pointer coordinates on root window.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._scrollbar_size">
+<code class="descname">_scrollbar_size</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._scrollbar_size" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">int</span></code> – Scrollbar size.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._fit_offset">
+<code class="descname">_fit_offset</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._fit_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">int</span></code> – Fit offset.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._size">
+<code class="descname">_size</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._size" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>) – Image size.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._rotate">
+<code class="descname">_rotate</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">float</span></code> – Image rotation angle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._scale">
+<code class="descname">_scale</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._scale" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">float</span></code> – Zoom ratio.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._prev_scale">
+<code class="descname">_prev_scale</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._prev_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">float</span></code> – Previous zoom ratio.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._fit">
+<code class="descname">_fit</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._fit" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">FitType</span></code> – Fit type.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._do_fit">
+<code class="descname">_do_fit</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._do_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">function</span></code> – Fit function.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow._do_fit_funcs">
+<code class="descname">_do_fit_funcs</code><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow._do_fit_funcs" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">function</span></code> – Fit functions by type.</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">widget</span> <span class="o">=</span> <span class="n">DrawingWindow</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">widget</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">widget</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="n">render</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.BUTTON_MASK">
+<code class="descname">BUTTON_MASK</code><em class="property"> = &lt;flags GDK_BUTTON1_MASK | GDK_BUTTON2_MASK of type GdkModifierType&gt;</em><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.BUTTON_MASK" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ModifierType</span></code> – Pointer motion button mask.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.EVENTS">
+<code class="descname">EVENTS</code><em class="property"> = &lt;flags GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_LEAVE_NOTIFY_MASK of type GdkEventMask&gt;</em><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.EVENTS" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">EventMask</span></code> – Drawing area event mask.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.POLICY">
+<code class="descname">POLICY</code><em class="property"> = &lt;enum GTK_POLICY_AUTOMATIC of type GtkPolicyType&gt;</em><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.POLICY" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">PolicyType</span></code> – Scrollbar policy type.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.SHADOW">
+<code class="descname">SHADOW</code><em class="property"> = &lt;enum GTK_SHADOW_NONE of type GtkShadowType&gt;</em><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.SHADOW" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ShadowType</span></code> – Shadow type.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.draw_event">
+<code class="descname">draw_event</code><span class="sig-paren">(</span><em>_</em>, <em>ctx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.draw_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.draw_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle drawing area <code class="xref py py-obj docutils literal"><span class="pre">draw</span></code> event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.DrawingArea</span></code>) – </li>
+<li><strong>ctx</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cairo.Context</span></code>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.expose_event">
+<code class="descname">expose_event</code><span class="sig-paren">(</span><em>_</em>, <em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.expose_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.expose_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle drawing area <code class="xref py py-obj docutils literal"><span class="pre">expose</span></code> event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.DrawingArea</span></code>) – </li>
+<li><strong>event</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Event</span></code>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.get_angle">
+<code class="descname">get_angle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.get_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.get_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get image rotation angle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Angle in radians.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">float</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.get_fit">
+<code class="descname">get_fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.get_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.get_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get fit type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">FitType</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.get_screen_size">
+<code class="descname">get_screen_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.get_screen_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.get_screen_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get drawing area size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Drawing area width and height.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.get_size">
+<code class="descname">get_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.get_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get image size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Image width and height.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.get_window_size">
+<code class="descname">get_window_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.get_window_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.get_window_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get widget size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Widget width and height.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.get_zoom">
+<code class="descname">get_zoom</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.get_zoom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.get_zoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get zoom ratio.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">float</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.leave_notify_event">
+<code class="descname">leave_notify_event</code><span class="sig-paren">(</span><em>_</em>, <em>ev_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.leave_notify_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.leave_notify_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle drawing area <code class="xref py py-obj docutils literal"><span class="pre">leave-notify</span></code> event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.DrawingArea</span></code>) – </li>
+<li><strong>ev</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Event</span></code>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code> to stop event propagation.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.motion_notify_event">
+<code class="descname">motion_notify_event</code><span class="sig-paren">(</span><em>_</em>, <em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.motion_notify_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.motion_notify_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle drawing area <code class="xref py py-obj docutils literal"><span class="pre">motion-notify</span></code> event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.DrawingArea</span></code>) – </li>
+<li><strong>event</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Event</span></code>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code> to stop event propagation.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.queue_draw">
+<code class="descname">queue_draw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.queue_draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.queue_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queue drawing area redraw.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.scroll_event">
+<code class="descname">scroll_event</code><span class="sig-paren">(</span><em>_</em>, <em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.scroll_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.scroll_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle <code class="xref py py-obj docutils literal"><span class="pre">scroll</span></code> event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_</strong> (<a class="reference internal" href="#pygtkdrawingwindow.base.DrawingWindow" title="pygtkdrawingwindow.base.DrawingWindow"><code class="xref py py-obj docutils literal"><span class="pre">DrawingWindow</span></code></a>) – </li>
+<li><strong>event</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Event</span></code>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code> to stop event propagation.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.set_angle">
+<code class="descname">set_angle</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.set_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.set_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set image rotation angle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>angle</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – Angle in radians.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.set_fit">
+<code class="descname">set_fit</code><span class="sig-paren">(</span><em>fit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.set_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.set_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set fit type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fit</strong> (<code class="xref py py-obj docutils literal"><span class="pre">FitType</span></code>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.set_size">
+<code class="descname">set_size</code><span class="sig-paren">(</span><em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.set_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.set_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set image size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>width</strong> (<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>) – Image width.</li>
+<li><strong>height</strong> (<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>) – Image height.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.set_zoom">
+<code class="descname">set_zoom</code><span class="sig-paren">(</span><em>ratio</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.set_zoom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.set_zoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set zoom ratio.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ratio</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.size_allocate_event">
+<code class="descname">size_allocate_event</code><span class="sig-paren">(</span><em>_</em>, <em>ev_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.size_allocate_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.size_allocate_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle drawing area <code class="xref py py-obj docutils literal"><span class="pre">size-allocate</span></code> event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.DrawingArea</span></code>) – </li>
+<li><strong>ev</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Event</span></code>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.update_fit">
+<code class="descname">update_fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.update_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.update_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update zoom to fit resized widget.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.zoom_fit">
+<code class="descname">zoom_fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.zoom_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.zoom_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zoom to fit width and height.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.zoom_fit_height">
+<code class="descname">zoom_fit_height</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.zoom_fit_height"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.zoom_fit_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zoom to fit height.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.zoom_fit_or_1to1">
+<code class="descname">zoom_fit_or_1to1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.zoom_fit_or_1to1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.zoom_fit_or_1to1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zoom to fit or 1:1.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.zoom_fit_width">
+<code class="descname">zoom_fit_width</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.zoom_fit_width"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.zoom_fit_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zoom to fit width.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.zoom_in">
+<code class="descname">zoom_in</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.zoom_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.zoom_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zoom in.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.base.DrawingWindow.zoom_out">
+<code class="descname">zoom_out</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/base.html#DrawingWindow.zoom_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.base.DrawingWindow.zoom_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Zoom out.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pygtkdrawingwindow.deps">
+<span id="pygtkdrawingwindow-deps-module"></span><h2>pygtkdrawingwindow.deps module<a class="headerlink" href="#module-pygtkdrawingwindow.deps" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pygtkdrawingwindow.deps.IconSize">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.deps.</code><code class="descname">IconSize</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#IconSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.IconSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>PyGTK icon sizes.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.IconSize.DIALOG">
+<code class="descname">DIALOG</code><em class="property"> = 6</em><a class="headerlink" href="#pygtkdrawingwindow.deps.IconSize.DIALOG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtkdrawingwindow.deps.ImageType">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.deps.</code><code class="descname">ImageType</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#ImageType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>PyGTK image types.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.ANIMATION">
+<code class="descname">ANIMATION</code><em class="property"> = 6</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.ANIMATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.EMPTY">
+<code class="descname">EMPTY</code><em class="property"> = 0</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.EMPTY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.ICON_SET">
+<code class="descname">ICON_SET</code><em class="property"> = 5</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.ICON_SET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.IMAGE">
+<code class="descname">IMAGE</code><em class="property"> = 2</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.IMAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.PIXBUF">
+<code class="descname">PIXBUF</code><em class="property"> = 3</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.PIXBUF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.PIXMAP">
+<code class="descname">PIXMAP</code><em class="property"> = 1</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.PIXMAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ImageType.STOCK">
+<code class="descname">STOCK</code><em class="property"> = 4</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ImageType.STOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtkdrawingwindow.deps.NoRsvg">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.deps.</code><code class="descname">NoRsvg</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#NoRsvg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.NoRsvg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Missing rsvg module class.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rsvg</span> <span class="o">=</span> <span class="n">NoRsvg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rsvg</span><span class="o">.</span><span class="n">Handle</span><span class="p">(</span><span class="s1">&#39;image.svg&#39;</span><span class="p">)</span>
+<span class="go">glib.GError: missing rsvg module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rsvg</span><span class="o">.</span><span class="n">Handle</span><span class="o">.</span><span class="n">new_from_file</span><span class="p">(</span><span class="s1">&#39;image.svg&#39;</span><span class="p">)</span>
+<span class="go">glib.GError: missing rsvg module</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="pygtkdrawingwindow.deps.NoRsvg.Handle">
+<em class="property">class </em><code class="descname">Handle</code><span class="sig-paren">(</span><em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#NoRsvg.Handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.NoRsvg.Handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>rsvg handle class.</p>
+<dl class="method">
+<dt id="pygtkdrawingwindow.deps.NoRsvg.Handle.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#NoRsvg.Handle.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.NoRsvg.Handle.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Throw missing module error.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*_</strong> – Unused.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">glib.GError</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pygtkdrawingwindow.deps.NoRsvg.Handle.error">
+<em class="property">static </em><code class="descname">error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#NoRsvg.Handle.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.NoRsvg.Handle.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Throw missing module error.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">glib.GError</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pygtkdrawingwindow.deps.NoRsvg.Handle.new_from_file">
+<em class="property">classmethod </em><code class="descname">new_from_file</code><span class="sig-paren">(</span><em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#NoRsvg.Handle.new_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.NoRsvg.Handle.new_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Throw missing module error.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*_</strong> – Unused.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">glib.GError</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtkdrawingwindow.deps.PolicyType">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.deps.</code><code class="descname">PolicyType</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#PolicyType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.PolicyType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>PyGTK scrollbar policy types.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.PolicyType.ALWAYS">
+<code class="descname">ALWAYS</code><em class="property"> = 0</em><a class="headerlink" href="#pygtkdrawingwindow.deps.PolicyType.ALWAYS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.PolicyType.AUTOMATIC">
+<code class="descname">AUTOMATIC</code><em class="property"> = 1</em><a class="headerlink" href="#pygtkdrawingwindow.deps.PolicyType.AUTOMATIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.PolicyType.NEVER">
+<code class="descname">NEVER</code><em class="property"> = 2</em><a class="headerlink" href="#pygtkdrawingwindow.deps.PolicyType.NEVER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtkdrawingwindow.deps.ScrollDirection">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.deps.</code><code class="descname">ScrollDirection</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/deps.html#ScrollDirection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.deps.ScrollDirection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>PyGTK scroll directions.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ScrollDirection.DOWN">
+<code class="descname">DOWN</code><em class="property"> = 1</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ScrollDirection.DOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ScrollDirection.LEFT">
+<code class="descname">LEFT</code><em class="property"> = 2</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ScrollDirection.LEFT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ScrollDirection.RIGHT">
+<code class="descname">RIGHT</code><em class="property"> = 3</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ScrollDirection.RIGHT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ScrollDirection.SMOOTH">
+<code class="descname">SMOOTH</code><em class="property"> = -1</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ScrollDirection.SMOOTH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.deps.ScrollDirection.UP">
+<code class="descname">UP</code><em class="property"> = 0</em><a class="headerlink" href="#pygtkdrawingwindow.deps.ScrollDirection.UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pygtkdrawingwindow.image">
+<span id="pygtkdrawingwindow-image-module"></span><h2>pygtkdrawingwindow.image module<a class="headerlink" href="#module-pygtkdrawingwindow.image" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pygtkdrawingwindow.image.ImageWindow">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.image.</code><code class="descname">ImageWindow</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygtkdrawingwindow.base.DrawingWindow" title="pygtkdrawingwindow.base.DrawingWindow"><code class="xref py py-class docutils literal"><span class="pre">pygtkdrawingwindow.base.DrawingWindow</span></code></a></p>
+<p>Drawing widget with background image.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow.image_filter">
+<code class="descname">image_filter</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.image_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cairo filter for image scaling.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow.new_image_fit">
+<code class="descname">new_image_fit</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.new_image_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">FitType</span></code> – Fit type to set on image change.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow._image">
+<code class="descname">_image</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow._image" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">None</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code> – Background image.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow._animation">
+<code class="descname">_animation</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow._animation" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimationIter</span></code> – Animation iterator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow._animation_time">
+<code class="descname">_animation_time</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow._animation_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">float</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">None</span></code> – Animation start/stop time.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow._animation_timeout">
+<code class="descname">_animation_timeout</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow._animation_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">int</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">None</span></code> – Animation timeout id.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow._prev_delay">
+<code class="descname">_prev_delay</code><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow._prev_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">int</span></code> – Previous frame delay in milliseconds.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow.EVENTS">
+<code class="descname">EVENTS</code><em class="property"> = &lt;flags GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK of type GdkEventMask&gt;</em><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.EVENTS" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">EventMask</span></code> – Drawing area event mask.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.image.ImageWindow.MIN_ANIMATION_DELAY">
+<code class="descname">MIN_ANIMATION_DELAY</code><em class="property"> = 10</em><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.MIN_ANIMATION_DELAY" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">int</span></code> – Minimum animation frame delay in milliseconds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drawing widget constructor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.animation_step">
+<code class="descname">animation_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.animation_step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.animation_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animation timeout.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.do_render">
+<code class="descname">do_render</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.do_render"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.do_render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle <code class="xref py py-obj docutils literal"><span class="pre">render</span></code> signal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ctx</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cairo.Context</span></code>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.get_animation">
+<code class="descname">get_animation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.get_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.get_animation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code> if animation is started.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">bool</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.get_image">
+<code class="descname">get_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.get_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.get_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get background image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Background image.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">None</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.has_animation">
+<code class="descname">has_animation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.has_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.has_animation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code> if background image is animated.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">bool</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.reset_animation">
+<code class="descname">reset_animation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.reset_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.reset_animation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restart animation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.set_animation">
+<code class="descname">set_animation</code><span class="sig-paren">(</span><em>enable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.set_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.set_animation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set animation state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enable</strong> (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>) – <code class="xref py py-obj docutils literal"><span class="pre">True</span></code> to start animation, <code class="xref py py-obj docutils literal"><span class="pre">False</span></code> to stop.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.set_image">
+<code class="descname">set_image</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.set_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.set_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set background image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<code class="xref py py-obj docutils literal"><span class="pre">None</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">str</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.Image</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code>) – Background image.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.start_animation">
+<code class="descname">start_animation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.start_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.start_animation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start animation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtkdrawingwindow.image.ImageWindow.stop_animation">
+<code class="descname">stop_animation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/image.html#ImageWindow.stop_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.image.ImageWindow.stop_animation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop animation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pygtkdrawingwindow.util">
+<span id="pygtkdrawingwindow-util-module"></span><h2>pygtkdrawingwindow.util module<a class="headerlink" href="#module-pygtkdrawingwindow.util" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pygtkdrawingwindow.util.FitType">
+<em class="property">class </em><code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">FitType</code><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#FitType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.FitType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<p>Zoom fit types.</p>
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.util.FitType.FIT">
+<code class="descname">FIT</code><em class="property"> = 1</em><a class="headerlink" href="#pygtkdrawingwindow.util.FitType.FIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.util.FitType.FIT_OR_1TO1">
+<code class="descname">FIT_OR_1TO1</code><em class="property"> = 4</em><a class="headerlink" href="#pygtkdrawingwindow.util.FitType.FIT_OR_1TO1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.util.FitType.HEIGHT">
+<code class="descname">HEIGHT</code><em class="property"> = 3</em><a class="headerlink" href="#pygtkdrawingwindow.util.FitType.HEIGHT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.util.FitType.LAST">
+<code class="descname">LAST</code><em class="property"> = -1</em><a class="headerlink" href="#pygtkdrawingwindow.util.FitType.LAST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.util.FitType.NONE">
+<code class="descname">NONE</code><em class="property"> = 0</em><a class="headerlink" href="#pygtkdrawingwindow.util.FitType.NONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtkdrawingwindow.util.FitType.WIDTH">
+<code class="descname">WIDTH</code><em class="property"> = 2</em><a class="headerlink" href="#pygtkdrawingwindow.util.FitType.WIDTH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.freeze">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">freeze</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#freeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.freeze" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget update freezing context manager.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>widget</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.Widget</span></code>) – Widget to freeze.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.get_gtk_image_size">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">get_gtk_image_size</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#get_gtk_image_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.get_gtk_image_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get GTK size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.Image</span></code>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If image storage type is invalid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Image width and height.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.get_image_size">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">get_image_size</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#get_image_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.get_image_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get image size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<code class="xref py py-obj docutils literal"><span class="pre">None</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.Image</span></code>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> – If image type is invalid.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Image width and height.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.get_pixbuf_size">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">get_pixbuf_size</code><span class="sig-paren">(</span><em>pixbuf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#get_pixbuf_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.get_pixbuf_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get GTK pixbuf size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Pixbuf width and height.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">int</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.get_scroll_direction">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">get_scroll_direction</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#get_scroll_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.get_scroll_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get scroll event direction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Event</span></code>) – Scroll event.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">ScrollDirection</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.get_timeval">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">get_timeval</code><span class="sig-paren">(</span><em>time_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#get_timeval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.get_timeval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get time value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>time</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – Time from <code class="xref py py-obj docutils literal"><span class="pre">time.time()</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Time value for <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation.get_iter()</span></code>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">gi.repository.GLib.TimeVal</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">float</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.ignore_args">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">ignore_args</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#ignore_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.ignore_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a function that ignores its arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>func</strong> (<code class="xref py py-obj docutils literal"><span class="pre">function</span></code>) – Function to decorate.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">function</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ignore_args</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.load_gtk_image">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">load_gtk_image</code><span class="sig-paren">(</span><em>img</em>, <em>widget=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#load_gtk_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.load_gtk_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load GTK image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>img</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.Image</span></code>) – Image to load.</li>
+<li><strong>widget</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.Widget</span></code>, optional) – Widget for icon rendering (default: gtk.Label()).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If image storage type not in (EMPTY, PIXBUF, ANIMATION, STOCK).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Loaded image or <code class="xref py py-obj docutils literal"><span class="pre">None</span></code> if image is empty.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">None</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.load_image">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">load_image</code><span class="sig-paren">(</span><em>img</em>, <em>widget=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#load_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.load_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>img</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.Image</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code>) – Image to load.</li>
+<li><strong>widget</strong> (<code class="xref py py-obj docutils literal"><span class="pre">gtk.Widget</span></code>, optional) – Widget for icon rendering (default: gtk.Label()).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Loaded image or <code class="xref py py-obj docutils literal"><span class="pre">None</span></code> if image is empty.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.Pixbuf</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.gdk.PixbufAnimation</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">None</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.load_image_file">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">load_image_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#load_image_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.load_image_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load image from file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – Image file path.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Loaded image.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">rsvg.Handle</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">gtk.Image</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.log">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">log</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log function calls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msg</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – Message to print before each function call.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Decorator.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">function</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@log</span><span class="p">(</span><span class="s1">&#39;called&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">x</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">called</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtkdrawingwindow.util.nop">
+<code class="descclassname">pygtkdrawingwindow.util.</code><code class="descname">nop</code><span class="sig-paren">(</span><em>*_</em>, <em>**kw_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygtkdrawingwindow/util.html#nop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtkdrawingwindow.util.nop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do nothing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>*_</strong> – Unused.</li>
+<li><strong>**kw_</strong> – Unused.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pygtkdrawingwindow">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pygtkdrawingwindow" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="modules.html" class="btn btn-neutral" title="pygtkdrawingwindow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, dead-beef.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+pygtkdrawingwindow package
+==========================
+
+Submodules
+----------
+
+pygtkdrawingwindow\.base module
+-------------------------------
+
+.. automodule:: pygtkdrawingwindow.base
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pygtkdrawingwindow\.deps module
+-------------------------------
+
+.. automodule:: pygtkdrawingwindow.deps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pygtkdrawingwindow\.image module
+--------------------------------
+
+.. automodule:: pygtkdrawingwindow.image
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pygtkdrawingwindow\.util module
+-------------------------------
+
+.. automodule:: pygtkdrawingwindow.util
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pygtkdrawingwindow
+    :members:
+    :undoc-members:
+    :show-inheritance:

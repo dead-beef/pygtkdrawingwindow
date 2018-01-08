@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pygtkdrawingwindow.util &mdash; pygtkdrawingwindow 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="pygtkdrawingwindow 0.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="pygtkdrawingwindow" href="../pygtkdrawingwindow.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pygtkdrawingwindow
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    <a href="../../index.html">
+        README
+    </a>
+    <a href="../../genindex.html">
+        Index
+    </a>
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">pygtkdrawingwindow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/pygtkdrawingwindow.html">pygtkdrawingwindow package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.base">pygtkdrawingwindow.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.deps">pygtkdrawingwindow.deps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.image">pygtkdrawingwindow.image module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.util">pygtkdrawingwindow.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pygtkdrawingwindow</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../pygtkdrawingwindow.html">pygtkdrawingwindow</a> &raquo;</li>
+        
+      <li>pygtkdrawingwindow.util</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pygtkdrawingwindow.util</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">with_statement</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
+
+<span class="kn">from</span> <span class="nn">.deps</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">STRING_TYPES</span><span class="p">,</span> <span class="n">IntEnum</span><span class="p">,</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">ScrollDirection</span><span class="p">,</span> <span class="n">TimeVal</span><span class="p">,</span>
+    <span class="n">Pixbuf</span><span class="p">,</span> <span class="n">PixbufAnimation</span><span class="p">,</span> <span class="n">gtk</span><span class="p">,</span> <span class="n">glib</span><span class="p">,</span> <span class="n">rsvg</span><span class="p">,</span>
+    <span class="n">rsvg_handle_new_from_file</span><span class="p">,</span>
+    <span class="n">gtk_image_new_from_file</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="FitType"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.FitType">[docs]</a><span class="k">class</span> <span class="nc">FitType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Zoom fit types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">LAST</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">FIT</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">FIT_OR_1TO1</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+
+<div class="viewcode-block" id="nop"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.nop">[docs]</a><span class="k">def</span> <span class="nf">nop</span><span class="p">(</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="o">**</span><span class="n">kw_</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Do nothing.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    *_</span>
+<span class="sd">        Unused.</span>
+<span class="sd">    **kw_</span>
+<span class="sd">        Unused.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Log function calls.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    msg : `str`</span>
+<span class="sd">        Message to print before each function call.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `function`</span>
+<span class="sd">        Decorator.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; @log(&#39;called&#39;)</span>
+<span class="sd">    ... def f(x):</span>
+<span class="sd">    ...   return x</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; f(0)</span>
+<span class="sd">    called</span>
+<span class="sd">    0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">ret</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+<div class="viewcode-block" id="ignore_args"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.ignore_args">[docs]</a><span class="k">def</span> <span class="nf">ignore_args</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a function that ignores its arguments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : `function`</span>
+<span class="sd">        Function to decorate.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `function`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; @ignore_args</span>
+<span class="sd">    ... def f(*args):</span>
+<span class="sd">    ...     print(args)</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; f(1, 2, x=3)</span>
+<span class="sd">    ()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">ret</span><span class="p">(</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="o">**</span><span class="n">kw_</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="freeze"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.freeze">[docs]</a><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="n">widget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Widget update freezing context manager.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    widget : `gtk.Widget`</span>
+<span class="sd">        Widget to freeze.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">freeze_updates</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">window</span><span class="o">.</span><span class="n">thaw_updates</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_scroll_direction"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.get_scroll_direction">[docs]</a><span class="k">def</span> <span class="nf">get_scroll_direction</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get scroll event direction.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    event : `gtk.gdk.Event`</span>
+<span class="sd">        Scroll event.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `ScrollDirection`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">SMOOTH</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">delta_y</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">UP</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">delta_y</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">DOWN</span>
+    <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">direction</span></div>
+
+<div class="viewcode-block" id="get_timeval"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.get_timeval">[docs]</a><span class="k">def</span> <span class="nf">get_timeval</span><span class="p">(</span><span class="n">time_</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get time value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time_ : `float`</span>
+<span class="sd">        Time from `time.time()`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `gi.repository.GLib.TimeVal` or `float`</span>
+<span class="sd">        Time value for `gtk.gdk.PixbufAnimation.get_iter()`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">TimeVal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">time_</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">TimeVal</span><span class="p">()</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time_</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="get_pixbuf_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.get_pixbuf_size">[docs]</a><span class="k">def</span> <span class="nf">get_pixbuf_size</span><span class="p">(</span><span class="n">pixbuf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get GTK pixbuf size.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img: `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    (`int`, `int`)</span>
+<span class="sd">        Pixbuf width and height.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">pixbuf</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span> <span class="n">pixbuf</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_gtk_image_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.get_gtk_image_size">[docs]</a><span class="k">def</span> <span class="nf">get_gtk_image_size</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get GTK size.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img: `gtk.Image`</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If image storage type is invalid.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    (`int`, `int`)</span>
+<span class="sd">        Image width and height.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_storage_type</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">EMPTY</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">PIXBUF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_pixbuf_size</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">get_pixbuf</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">ANIMATION</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_pixbuf_size</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">get_animation</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">STOCK</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gtk</span><span class="o">.</span><span class="n">icon_size_lookup</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">get_stock</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">ICON_SET</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gtk</span><span class="o">.</span><span class="n">icon_size_lookup</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">get_icon_set</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1">#if PYGTK:</span>
+    <span class="c1">#    if dtype == ImageType.IMAGE:</span>
+    <span class="c1">#        img, mask = img.get_image()</span>
+    <span class="c1">#        if img is not None:</span>
+    <span class="c1">#            return (img.get_width(), img.get_height())</span>
+    <span class="c1">#        if mask is not None:</span>
+    <span class="c1">#            return mask.get_size()</span>
+    <span class="c1">#        return (0, 0)</span>
+    <span class="c1">#    if dtype == ImageType.PIXMAP:</span>
+    <span class="c1">#        img, mask = img.get_pixmap()</span>
+    <span class="c1">#        if img is not None:</span>
+    <span class="c1">#            return img.get_size()</span>
+    <span class="c1">#        if mask is not None:</span>
+    <span class="c1">#            return mask.get_size()</span>
+    <span class="c1">#        return (0, 0)</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown image type: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dtype</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="get_image_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.get_image_size">[docs]</a><span class="k">def</span> <span class="nf">get_image_size</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get image size.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img: `None` or `rsvg.Handle` or `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `gtk.Image`</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If image type is invalid.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    (`int`, `int`)</span>
+<span class="sd">        Image width and height.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">rsvg</span><span class="o">.</span><span class="n">Handle</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">),</span> <span class="n">img</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">Pixbuf</span><span class="p">,</span> <span class="n">PixbufAnimation</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">get_pixbuf_size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Image</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_gtk_image_size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Invalid image type: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">img</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="load_image_file"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.load_image_file">[docs]</a><span class="k">def</span> <span class="nf">load_image_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load image from file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : `str`</span>
+<span class="sd">        Image file path.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `rsvg.Handle` or `gtk.Image`</span>
+<span class="sd">        Loaded image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rsvg_handle_new_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">glib</span><span class="o">.</span><span class="n">GError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gtk_image_new_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="load_gtk_image"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.load_gtk_image">[docs]</a><span class="k">def</span> <span class="nf">load_gtk_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load GTK image.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img : `gtk.Image`</span>
+<span class="sd">        Image to load.</span>
+<span class="sd">    widget : `gtk.Widget`, optional</span>
+<span class="sd">        Widget for icon rendering (default: gtk.Label()).</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If image storage type not in (EMPTY, PIXBUF, ANIMATION, STOCK).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `None`</span>
+<span class="sd">        Loaded image or `None` if image is empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_storage_type</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">EMPTY</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">PIXBUF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">img</span><span class="o">.</span><span class="n">get_pixbuf</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">ANIMATION</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">img</span><span class="o">.</span><span class="n">get_animation</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">ImageType</span><span class="o">.</span><span class="n">STOCK</span><span class="p">:</span>
+        <span class="n">create_widget</span> <span class="o">=</span> <span class="n">widget</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">create_widget</span><span class="p">:</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_stock</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">widget</span><span class="o">.</span><span class="n">render_icon</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">create_widget</span><span class="p">:</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown image type: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dtype</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="load_image"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.util.load_image">[docs]</a><span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load an image.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img : `str` or `gtk.Image` or `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `rsvg.Handle`</span>
+<span class="sd">        Image to load.</span>
+<span class="sd">    widget : `gtk.Widget`, optional</span>
+<span class="sd">        Widget for icon rendering (default: gtk.Label()).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `rsvg.Handle` or `None`</span>
+<span class="sd">        Loaded image or `None` if image is empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">STRING_TYPES</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_image_file</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Image</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_gtk_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">widget</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">PixbufAnimation</span><span class="p">)</span> <span class="ow">and</span> <span class="n">img</span><span class="o">.</span><span class="n">is_static_image</span><span class="p">():</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_static_image</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">img</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, dead-beef.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

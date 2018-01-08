@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pygtkdrawingwindow.deps &mdash; pygtkdrawingwindow 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="pygtkdrawingwindow 0.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="pygtkdrawingwindow" href="../pygtkdrawingwindow.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pygtkdrawingwindow
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    <a href="../../index.html">
+        README
+    </a>
+    <a href="../../genindex.html">
+        Index
+    </a>
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">pygtkdrawingwindow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/pygtkdrawingwindow.html">pygtkdrawingwindow package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.base">pygtkdrawingwindow.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.deps">pygtkdrawingwindow.deps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.image">pygtkdrawingwindow.image module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.util">pygtkdrawingwindow.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pygtkdrawingwindow</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../pygtkdrawingwindow.html">pygtkdrawingwindow</a> &raquo;</li>
+        
+      <li>pygtkdrawingwindow.deps</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pygtkdrawingwindow.deps</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint:disable=import-error,no-name-in-module,unused-import</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">with_statement</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">IntEnum</span>
+
+<span class="kn">import</span> <span class="nn">cairo</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s1">&#39;gi&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;use gi&#39;</span><span class="p">)</span>
+
+    <span class="kn">import</span> <span class="nn">pygtk</span>
+    <span class="n">pygtk</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">glib</span>
+    <span class="kn">import</span> <span class="nn">gobject</span>
+    <span class="kn">import</span> <span class="nn">gtk</span>
+    <span class="kn">from</span> <span class="nn">gtk</span> <span class="k">import</span> <span class="n">gdk</span>
+    <span class="kn">from</span> <span class="nn">gtk.gdk</span> <span class="k">import</span> <span class="n">Pixbuf</span><span class="p">,</span> <span class="n">PixbufAnimation</span>
+
+    <span class="n">TimeVal</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">rsvg</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">rsvg</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">PYGTK</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="p">(</span>
+        <span class="n">Gtk</span> <span class="k">as</span> <span class="n">gtk</span><span class="p">,</span>
+        <span class="n">Gdk</span> <span class="k">as</span> <span class="n">gdk</span><span class="p">,</span>
+        <span class="n">GLib</span> <span class="k">as</span> <span class="n">glib</span><span class="p">,</span>
+        <span class="n">GObject</span> <span class="k">as</span> <span class="n">gobject</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">gi.repository.Gtk</span> <span class="k">import</span> <span class="n">ImageType</span><span class="p">,</span> <span class="n">PolicyType</span><span class="p">,</span> <span class="n">IconSize</span>
+    <span class="kn">from</span> <span class="nn">gi.repository.Gdk</span> <span class="k">import</span> <span class="n">ScrollDirection</span>
+    <span class="kn">from</span> <span class="nn">gi.repository.GdkPixbuf</span> <span class="k">import</span> <span class="n">Pixbuf</span><span class="p">,</span> <span class="n">PixbufAnimation</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">gi.repository.GLib</span> <span class="k">import</span> <span class="n">TimeVal</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">TimeVal</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Rsvg</span> <span class="k">as</span> <span class="n">rsvg</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">rsvg</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">PYGTK</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="NoRsvg"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.NoRsvg">[docs]</a><span class="k">class</span> <span class="nc">NoRsvg</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Missing rsvg module class.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; rsvg = NoRsvg</span>
+<span class="sd">    &gt;&gt;&gt; rsvg.Handle(&#39;image.svg&#39;)</span>
+<span class="sd">    glib.GError: missing rsvg module</span>
+<span class="sd">    &gt;&gt;&gt; rsvg.Handle.new_from_file(&#39;image.svg&#39;)</span>
+<span class="sd">    glib.GError: missing rsvg module</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="NoRsvg.Handle"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.NoRsvg.Handle">[docs]</a>    <span class="k">class</span> <span class="nc">Handle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;rsvg handle class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="NoRsvg.Handle.error"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.NoRsvg.Handle.error">[docs]</a>        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">error</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;Throw missing module error.</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            glib.GError</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">raise</span> <span class="n">glib</span><span class="o">.</span><span class="n">GError</span><span class="p">(</span><span class="s1">&#39;missing rsvg module&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NoRsvg.Handle.__init__"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.NoRsvg.Handle.__init__">[docs]</a>        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Throw missing module error.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            *_</span>
+<span class="sd">                Unused.</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            glib.GError</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NoRsvg.Handle.new_from_file"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.NoRsvg.Handle.new_from_file">[docs]</a>        <span class="nd">@classmethod</span>
+        <span class="k">def</span> <span class="nf">new_from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Throw missing module error.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            *_</span>
+<span class="sd">                Unused.</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            glib.GError</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">error</span><span class="p">()</span></div></div></div>
+
+
+<span class="k">if</span> <span class="n">rsvg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">rsvg</span> <span class="o">=</span> <span class="n">NoRsvg</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">izip</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">izip</span> <span class="o">=</span> <span class="nb">zip</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">STRING_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">STRING_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">PYGTK</span><span class="p">:</span>
+    <span class="n">gtk_image_new_from_file</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">image_new_from_file</span>
+    <span class="n">gtk_image_new_from_stock</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">image_new_from_stock</span>
+    <span class="n">cairo_set_source_pixbuf</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">CairoContext</span><span class="o">.</span><span class="n">set_source_pixbuf</span>
+    <span class="n">rsvg_handle_new_from_file</span> <span class="o">=</span> <span class="n">rsvg</span><span class="o">.</span><span class="n">Handle</span>
+
+<div class="viewcode-block" id="ImageType"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.ImageType">[docs]</a>    <span class="k">class</span> <span class="nc">ImageType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span> <span class="c1"># pylint:disable=function-redefined</span>
+        <span class="sd">&quot;&quot;&quot;PyGTK image types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">EMPTY</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_EMPTY</span>
+        <span class="n">PIXBUF</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_PIXBUF</span>
+        <span class="n">ANIMATION</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_ANIMATION</span>
+        <span class="n">IMAGE</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_IMAGE</span>
+        <span class="n">PIXMAP</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_PIXMAP</span>
+        <span class="n">STOCK</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_STOCK</span>
+        <span class="n">ICON_SET</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">IMAGE_ICON_SET</span></div>
+
+<div class="viewcode-block" id="PolicyType"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.PolicyType">[docs]</a>    <span class="k">class</span> <span class="nc">PolicyType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span> <span class="c1"># pylint:disable=function-redefined</span>
+        <span class="sd">&quot;&quot;&quot;PyGTK scrollbar policy types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ALWAYS</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">POLICY_ALWAYS</span>
+        <span class="n">AUTOMATIC</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">POLICY_AUTOMATIC</span>
+        <span class="n">NEVER</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">POLICY_NEVER</span></div>
+
+<div class="viewcode-block" id="ScrollDirection"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.ScrollDirection">[docs]</a>    <span class="k">class</span> <span class="nc">ScrollDirection</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span> <span class="c1"># pylint:disable=function-redefined</span>
+        <span class="sd">&quot;&quot;&quot;PyGTK scroll directions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">UP</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">SCROLL_UP</span>
+        <span class="n">DOWN</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">SCROLL_DOWN</span>
+        <span class="n">LEFT</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">SCROLL_LEFT</span>
+        <span class="n">RIGHT</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">SCROLL_RIGHT</span>
+        <span class="n">SMOOTH</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="IconSize"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.deps.IconSize">[docs]</a>    <span class="k">class</span> <span class="nc">IconSize</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span> <span class="c1"># pylint:disable=function-redefined</span>
+        <span class="sd">&quot;&quot;&quot;PyGTK icon sizes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DIALOG</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">ICON_SIZE_DIALOG</span></div>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">gtk_image_new_from_file</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_file</span>
+    <span class="n">gtk_image_new_from_stock</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_stock</span>
+    <span class="n">cairo_set_source_pixbuf</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">cairo_set_source_pixbuf</span>
+    <span class="n">rsvg_handle_new_from_file</span> <span class="o">=</span> <span class="n">rsvg</span><span class="o">.</span><span class="n">Handle</span><span class="o">.</span><span class="n">new_from_file</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, dead-beef.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

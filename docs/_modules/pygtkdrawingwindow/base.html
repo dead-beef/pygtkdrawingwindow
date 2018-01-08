@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pygtkdrawingwindow.base &mdash; pygtkdrawingwindow 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="pygtkdrawingwindow 0.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="pygtkdrawingwindow" href="../pygtkdrawingwindow.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pygtkdrawingwindow
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    <a href="../../index.html">
+        README
+    </a>
+    <a href="../../genindex.html">
+        Index
+    </a>
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">pygtkdrawingwindow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/pygtkdrawingwindow.html">pygtkdrawingwindow package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.base">pygtkdrawingwindow.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.deps">pygtkdrawingwindow.deps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.image">pygtkdrawingwindow.image module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.util">pygtkdrawingwindow.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pygtkdrawingwindow</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../pygtkdrawingwindow.html">pygtkdrawingwindow</a> &raquo;</li>
+        
+      <li>pygtkdrawingwindow.base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pygtkdrawingwindow.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">with_statement</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">ceil</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+
+<span class="kn">from</span> <span class="nn">.deps</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">PYGTK</span><span class="p">,</span> <span class="n">gtk</span><span class="p">,</span> <span class="n">gdk</span><span class="p">,</span> <span class="n">gobject</span><span class="p">,</span> <span class="n">izip</span><span class="p">,</span> <span class="n">PolicyType</span><span class="p">,</span> <span class="n">ScrollDirection</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="n">FitType</span><span class="p">,</span> <span class="n">nop</span><span class="p">,</span> <span class="n">freeze</span><span class="p">,</span> <span class="n">ignore_args</span><span class="p">,</span> <span class="n">get_scroll_direction</span>
+
+
+<div class="viewcode-block" id="DrawingWindow"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow">[docs]</a><span class="k">class</span> <span class="nc">DrawingWindow</span><span class="p">(</span><span class="n">gtk</span><span class="o">.</span><span class="n">ScrolledWindow</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Drawing widget.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __gsignals__</span>
+<span class="sd">        GObject signals:</span>
+
+<span class="sd">        render(widget : `DrawingWindow`, ctx: `cairo.Context`)</span>
+<span class="sd">            Image draw signal.</span>
+<span class="sd">    screen : `gtk.DrawingArea`</span>
+<span class="sd">        Drawing area.</span>
+<span class="sd">    pointer : (`float`, `float`) or None</span>
+<span class="sd">        Pointer coordinates on drawing area.</span>
+<span class="sd">    pointer_root : (`float`, `float`) or None</span>
+<span class="sd">        Pointer coordinates on root window.</span>
+<span class="sd">    _scrollbar_size : `int`</span>
+<span class="sd">        Scrollbar size.</span>
+<span class="sd">    _fit_offset : `int`</span>
+<span class="sd">        Fit offset.</span>
+<span class="sd">    _size : (`int`, `int`)</span>
+<span class="sd">        Image size.</span>
+<span class="sd">    _rotate : `float`</span>
+<span class="sd">        Image rotation angle.</span>
+<span class="sd">    _scale : `float`</span>
+<span class="sd">        Zoom ratio.</span>
+<span class="sd">    _prev_scale : `float`</span>
+<span class="sd">        Previous zoom ratio.</span>
+<span class="sd">    _fit : `FitType`</span>
+<span class="sd">        Fit type.</span>
+<span class="sd">    _do_fit : `function`</span>
+<span class="sd">        Fit function.</span>
+<span class="sd">    _do_fit_funcs : `tuple` of `function`</span>
+<span class="sd">        Fit functions by type.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; def render(widget, ctx):</span>
+<span class="sd">    ...     width, height = widget.get_size()</span>
+<span class="sd">    ...     ctx.set_source_rgb(1.0, 0.5, 1.0)</span>
+<span class="sd">    ...     ctx.rectangle(0, 0, width, height)</span>
+<span class="sd">    ...     ctx.stroke()</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; widget = DrawingWindow()</span>
+<span class="sd">    &gt;&gt;&gt; widget.set_size(200, 200)</span>
+<span class="sd">    &gt;&gt;&gt; widget.connect(&#39;render&#39;, render)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__gsignals__</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;render&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">gobject</span><span class="o">.</span><span class="n">SIGNAL_RUN_FIRST</span><span class="p">,</span>
+                   <span class="n">gobject</span><span class="o">.</span><span class="n">TYPE_NONE</span><span class="p">,</span>
+                   <span class="p">(</span><span class="n">gobject</span><span class="o">.</span><span class="n">TYPE_PYOBJECT</span><span class="p">,))</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">PYGTK</span><span class="p">:</span>
+        <span class="n">POLICY</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">POLICY_AUTOMATIC</span>
+        <span class="n">SHADOW</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">SHADOW_NONE</span>
+        <span class="n">EVENTS</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">POINTER_MOTION_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">POINTER_MOTION_HINT_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">LEAVE_NOTIFY_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">BUTTON_PRESS_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">BUTTON_MOTION_MASK</span>
+        <span class="n">BUTTON_MASK</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">BUTTON2_MASK</span> <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">BUTTON1_MASK</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">POLICY</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span>
+        <span class="sd">&quot;&quot;&quot;`PolicyType` : Scrollbar policy type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">SHADOW</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">ShadowType</span><span class="o">.</span><span class="n">NONE</span>
+        <span class="sd">&quot;&quot;&quot;`ShadowType` : Shadow type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">EVENTS</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">POINTER_MOTION_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">POINTER_MOTION_HINT_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">LEAVE_NOTIFY_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">BUTTON_PRESS_MASK</span> \
+                 <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">BUTTON_MOTION_MASK</span>
+        <span class="sd">&quot;&quot;&quot;`EventMask` : Drawing area event mask.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">BUTTON_MASK</span> <span class="o">=</span> <span class="n">gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">BUTTON2_MASK</span> \
+                      <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">BUTTON1_MASK</span>
+        <span class="sd">&quot;&quot;&quot;`ModifierType` : Pointer motion button mask.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DrawingWindow.__init__"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DrawingWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_policy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">POLICY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">POLICY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_shadow_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SHADOW</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">DrawingArea</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_with_viewport</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scrollbar_size</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit_offset</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_scale</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_do_fit</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotate</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_do_fit_funcs</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">nop</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit_width</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit_height</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit_or_1to1</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_root</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">FIT_OR_1TO1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">set_events</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EVENTS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;size_allocate&#39;</span><span class="p">,</span> <span class="n">ignore_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_fit</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;scroll_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scroll_event</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;size_allocate&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_allocate_event</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;motion_notify_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_notify_event</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;leave_notify_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">leave_notify_event</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">PYGTK</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;expose_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">expose_event</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;draw&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw_event</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.get_fit"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.get_fit">[docs]</a>    <span class="k">def</span> <span class="nf">get_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get fit type.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `FitType`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.set_fit"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.set_fit">[docs]</a>    <span class="k">def</span> <span class="nf">set_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set fit type.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fit : `FitType`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_do_fit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_fit_funcs</span><span class="p">[</span><span class="n">fit</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid fit type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">fit</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="n">fit</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.get_zoom"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.get_zoom">[docs]</a>    <span class="k">def</span> <span class="nf">get_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get zoom ratio.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `float`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.set_zoom"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.set_zoom">[docs]</a>    <span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set zoom ratio.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -------</span>
+<span class="sd">        ratio : `float`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prev_scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="n">ratio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_screen_size</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.get_angle"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.get_angle">[docs]</a>    <span class="k">def</span> <span class="nf">get_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get image rotation angle.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `float`</span>
+<span class="sd">            Angle in radians.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotate</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.set_angle"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.set_angle">[docs]</a>    <span class="k">def</span> <span class="nf">set_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set image rotation angle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        angle : `float`</span>
+<span class="sd">            Angle in radians.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="n">width</span> <span class="o">/=</span> <span class="mi">2</span>
+        <span class="n">height</span> <span class="o">/=</span> <span class="mi">2</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">((</span><span class="o">-</span><span class="n">width</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="n">height</span><span class="p">,</span> <span class="n">height</span><span class="p">)))</span>
+        <span class="n">sin_</span><span class="p">,</span> <span class="n">cos_</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rect</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>
+            <span class="n">rect</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">x</span> <span class="o">*</span> <span class="n">cos_</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">sin_</span><span class="p">,</span>
+                <span class="n">y</span> <span class="o">*</span> <span class="n">cos_</span> <span class="o">-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">sin_</span>
+            <span class="p">)</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">rect</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">rect</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_zoom</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)),</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">scale</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotate</span> <span class="o">=</span> <span class="n">angle</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.get_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.get_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get image size.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (`int`, `int`)</span>
+<span class="sd">            Image width and height.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.set_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.set_size">[docs]</a>    <span class="k">def</span> <span class="nf">set_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set image size.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        width : `int`</span>
+<span class="sd">            Image width.</span>
+<span class="sd">        height : `int`</span>
+<span class="sd">            Image height.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_screen_size</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.get_window_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.get_window_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_window_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get widget size.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (`int`, `int`)</span>
+<span class="sd">            Widget width and height.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_allocation</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.get_screen_size"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.get_screen_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_screen_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get drawing area size.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (`int`, `int`)</span>
+<span class="sd">            Drawing area width and height.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">get_allocation</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span></div>
+
+    <span class="k">def</span> <span class="nf">_update_screen_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resize drawing area.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">sz</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_zoom</span><span class="p">())</span> <span class="k">for</span> <span class="n">sz</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">())</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_zoom_scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update scroll after zooming.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">dscale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_zoom</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_scale</span>
+
+        <span class="n">scrollbars</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hscrollbar</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vscrollbar</span><span class="p">())</span>
+        <span class="n">scrollbar_sizes</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">scrollbars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_allocation</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">scrollbars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_allocation</span><span class="p">()</span><span class="o">.</span><span class="n">height</span>
+        <span class="p">)</span>
+        <span class="n">maxsize</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scrollbar_sizes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">maxsize</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scrollbar_size</span> <span class="o">=</span> <span class="n">maxsize</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="n">sb</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">wnd_size</span> <span class="o">-</span> <span class="n">sb_size</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="k">for</span> <span class="n">sb</span><span class="p">,</span> <span class="n">sb_size</span><span class="p">,</span> <span class="n">wnd_size</span>
+                <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">scrollbars</span><span class="p">,</span> <span class="n">scrollbar_sizes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window_size</span><span class="p">())</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pointer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">dscale</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pointer</span><span class="p">)</span>
+
+        <span class="n">dscale</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">scrollbar</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">pointer</span><span class="p">,</span> <span class="n">scrollbars</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">scrollbar</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">+</span> <span class="n">dscale</span> <span class="o">*</span> <span class="n">x</span>
+            <span class="n">scrollbar</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_scale</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="DrawingWindow.size_allocate_event"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.size_allocate_event">[docs]</a>    <span class="k">def</span> <span class="nf">size_allocate_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">ev_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle drawing area `size-allocate` event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _ : `gtk.DrawingArea`</span>
+<span class="sd">        ev_ : `gtk.gdk.Event`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">freeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_zoom_scroll</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_fit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.expose_event"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.expose_event">[docs]</a>    <span class="k">def</span> <span class="nf">expose_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle drawing area `expose` event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _ : `gtk.DrawingArea`</span>
+<span class="sd">        event : `gtk.gdk.Event`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span><span class="o">.</span><span class="n">cairo_create</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+                      <span class="n">event</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">clip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_event</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.draw_event"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.draw_event">[docs]</a>    <span class="k">def</span> <span class="nf">draw_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle drawing area `draw` event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _ : `gtk.DrawingArea`</span>
+<span class="sd">        ctx : `cairo.Context`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_zoom</span><span class="p">()</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="n">width</span> <span class="o">*=</span> <span class="mf">0.5</span>
+        <span class="n">height</span> <span class="o">*=</span> <span class="mf">0.5</span>
+        <span class="n">off</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">wnd_size</span> <span class="o">-</span> <span class="n">img_size</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">wnd_size</span><span class="p">,</span> <span class="n">img_size</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_screen_size</span><span class="p">(),</span> <span class="n">size</span><span class="p">)]</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_angle</span><span class="p">())</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">width</span><span class="p">,</span> <span class="o">-</span><span class="n">height</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.leave_notify_event"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.leave_notify_event">[docs]</a>    <span class="k">def</span> <span class="nf">leave_notify_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">ev_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle drawing area `leave-notify` event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _ : `gtk.DrawingArea`</span>
+<span class="sd">        ev_ : `gtk.gdk.Event`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `bool`</span>
+<span class="sd">            `True` to stop event propagation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_root</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.motion_notify_event"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.motion_notify_event">[docs]</a>    <span class="k">def</span> <span class="nf">motion_notify_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle drawing area `motion-notify` event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _ : `gtk.DrawingArea`</span>
+<span class="sd">        event : `gtk.gdk.Event`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `bool`</span>
+<span class="sd">            `True` to stop event propagation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span> <span class="o">=</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">x_root</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">y_root</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pointer_root</span> <span class="o">=</span> <span class="n">pointer</span>
+
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">BUTTON_MASK</span><span class="p">:</span>
+            <span class="n">scrollbars</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hscrollbar</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vscrollbar</span><span class="p">())</span>
+            <span class="n">scrollbars</span> <span class="o">=</span> <span class="n">izip</span><span class="p">(</span><span class="n">pointer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_root</span><span class="p">,</span> <span class="n">scrollbars</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cur</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">scrollbar</span> <span class="ow">in</span> <span class="n">scrollbars</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">scrollbar</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">prev</span> <span class="o">-</span> <span class="n">cur</span><span class="p">)</span>
+                <span class="n">scrollbar</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_root</span> <span class="o">=</span> <span class="n">pointer</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.scroll_event"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.scroll_event">[docs]</a>    <span class="k">def</span> <span class="nf">scroll_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle `scroll` event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _ : `DrawingWindow`</span>
+<span class="sd">        event : `gtk.gdk.Event`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `bool`</span>
+<span class="sd">            `True` to stop event propagation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">get_scroll_direction</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="c1">#if event.state &amp; gdk.CONTROL_MASK:</span>
+        <span class="c1">#    if direction == ScrollDirection.UP:</span>
+        <span class="c1">#        self.rotate += 0.1</span>
+        <span class="c1">#    elif direction == ScrollDirection.DOWN:</span>
+        <span class="c1">#        self.rotate -= 0.1</span>
+        <span class="c1">#    return True</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_in</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="n">ScrollDirection</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_out</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.queue_draw"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.queue_draw">[docs]</a>    <span class="k">def</span> <span class="nf">queue_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># pylint:disable=arguments-differ</span>
+        <span class="sd">&quot;&quot;&quot;Queue drawing area redraw.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#super(DrawingWindow, self).queue_draw()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.update_fit"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.update_fit">[docs]</a>    <span class="k">def</span> <span class="nf">update_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update zoom to fit resized widget.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_do_fit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.zoom_in"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.zoom_in">[docs]</a>    <span class="k">def</span> <span class="nf">zoom_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zoom in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_zoom</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.zoom_out"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.zoom_out">[docs]</a>    <span class="k">def</span> <span class="nf">zoom_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zoom out.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_zoom</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.zoom_fit_or_1to1"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.zoom_fit_or_1to1">[docs]</a>    <span class="k">def</span> <span class="nf">zoom_fit_or_1to1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zoom to fit or 1:1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">wnd</span>
+               <span class="k">for</span> <span class="n">size</span><span class="p">,</span> <span class="n">wnd</span>
+               <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window_size</span><span class="p">())):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">FIT_OR_1TO1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.zoom_fit"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.zoom_fit">[docs]</a>    <span class="k">def</span> <span class="nf">zoom_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zoom to fit width and height.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">img_width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">img_height</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window_size</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">width</span> <span class="o">/</span> <span class="n">img_width</span> <span class="o">&lt;</span> <span class="n">height</span> <span class="o">/</span> <span class="n">img_height</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit_width</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zoom_fit_height</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">FIT</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.zoom_fit_width"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.zoom_fit_width">[docs]</a>    <span class="k">def</span> <span class="nf">zoom_fit_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zoom to fit width.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">img_width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">img_height</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window_size</span><span class="p">()</span>
+
+        <span class="n">_</span><span class="p">,</span> <span class="n">policy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_policy</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">policy</span> <span class="o">==</span> <span class="n">PolicyType</span><span class="o">.</span><span class="n">ALWAYS</span><span class="p">:</span>
+            <span class="n">scrollbar</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_offset</span><span class="p">)</span> <span class="o">/</span> <span class="n">img_width</span>
+            <span class="n">scrollbar</span> <span class="o">=</span> <span class="p">(</span><span class="n">policy</span> <span class="o">==</span> <span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span> \
+                         <span class="ow">and</span> <span class="n">ceil</span><span class="p">(</span><span class="n">img_height</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">height</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">scrollbar</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scrollbar_size</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_offset</span>
+            <span class="n">scale</span> <span class="o">/=</span> <span class="n">img_width</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">WIDTH</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DrawingWindow.zoom_fit_height"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.base.DrawingWindow.zoom_fit_height">[docs]</a>    <span class="k">def</span> <span class="nf">zoom_fit_height</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zoom to fit height.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img_width</span><span class="p">,</span> <span class="n">img_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">img_width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">img_height</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window_size</span><span class="p">()</span>
+
+        <span class="n">policy</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_policy</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">policy</span> <span class="o">==</span> <span class="n">PolicyType</span><span class="o">.</span><span class="n">ALWAYS</span><span class="p">:</span>
+            <span class="n">scrollbar</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_offset</span><span class="p">)</span> <span class="o">/</span> <span class="n">img_height</span>
+            <span class="n">scrollbar</span> <span class="o">=</span> <span class="p">(</span><span class="n">policy</span> <span class="o">==</span> <span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span> \
+                         <span class="ow">and</span> <span class="n">ceil</span><span class="p">(</span><span class="n">img_width</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">width</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">scrollbar</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">height</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scrollbar_size</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_offset</span>
+            <span class="n">scale</span> <span class="o">/=</span> <span class="n">img_height</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="n">FitType</span><span class="o">.</span><span class="n">HEIGHT</span><span class="p">)</span></div></div>
+
+
+<span class="n">gobject</span><span class="o">.</span><span class="n">type_register</span><span class="p">(</span><span class="n">DrawingWindow</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, dead-beef.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pygtkdrawingwindow.image &mdash; pygtkdrawingwindow 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="pygtkdrawingwindow 0.1.0 documentation" href="../../index.html"/>
+        <link rel="up" title="pygtkdrawingwindow" href="../pygtkdrawingwindow.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pygtkdrawingwindow
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    <a href="../../index.html">
+        README
+    </a>
+    <a href="../../genindex.html">
+        Index
+    </a>
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">pygtkdrawingwindow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/pygtkdrawingwindow.html">pygtkdrawingwindow package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.base">pygtkdrawingwindow.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.deps">pygtkdrawingwindow.deps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.image">pygtkdrawingwindow.image module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow.util">pygtkdrawingwindow.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/pygtkdrawingwindow.html#module-pygtkdrawingwindow">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pygtkdrawingwindow</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../pygtkdrawingwindow.html">pygtkdrawingwindow</a> &raquo;</li>
+        
+      <li>pygtkdrawingwindow.image</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pygtkdrawingwindow.image</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">with_statement</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+
+<span class="kn">from</span> <span class="nn">.deps</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">PYGTK</span><span class="p">,</span> <span class="n">gtk</span><span class="p">,</span> <span class="n">gdk</span><span class="p">,</span> <span class="n">gobject</span><span class="p">,</span> <span class="n">cairo</span><span class="p">,</span> <span class="n">rsvg</span><span class="p">,</span>
+    <span class="n">Pixbuf</span><span class="p">,</span> <span class="n">PixbufAnimation</span><span class="p">,</span> <span class="n">IconSize</span><span class="p">,</span>
+    <span class="n">cairo_set_source_pixbuf</span><span class="p">,</span>
+    <span class="n">gtk_image_new_from_stock</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">FitType</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">ignore_args</span><span class="p">,</span>
+    <span class="n">load_image</span><span class="p">,</span> <span class="n">get_image_size</span><span class="p">,</span> <span class="n">get_timeval</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">DrawingWindow</span>
+
+
+<div class="viewcode-block" id="ImageWindow"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow">[docs]</a><span class="k">class</span> <span class="nc">ImageWindow</span><span class="p">(</span><span class="n">DrawingWindow</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Drawing widget with background image.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image_filter</span>
+<span class="sd">        Cairo filter for image scaling.</span>
+<span class="sd">    new_image_fit : `FitType`</span>
+<span class="sd">        Fit type to set on image change.</span>
+<span class="sd">    _image : `None` or `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `rsvg.Handle`</span>
+<span class="sd">        Background image.</span>
+<span class="sd">    _animation : `gtk.gdk.PixbufAnimationIter`</span>
+<span class="sd">        Animation iterator.</span>
+<span class="sd">    _animation_time : `float` or `None`</span>
+<span class="sd">        Animation start/stop time.</span>
+<span class="sd">    _animation_timeout : `int` or `None`</span>
+<span class="sd">        Animation timeout id.</span>
+<span class="sd">    _prev_delay : `int`</span>
+<span class="sd">        Previous frame delay in milliseconds.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">MIN_ANIMATION_DELAY</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="sd">&quot;&quot;&quot;`int` : Minimum animation frame delay in milliseconds.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">PYGTK</span><span class="p">:</span>
+        <span class="n">EVENTS</span> <span class="o">=</span> <span class="n">DrawingWindow</span><span class="o">.</span><span class="n">EVENTS</span> <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">STRUCTURE_MASK</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">EVENTS</span> <span class="o">=</span> <span class="n">DrawingWindow</span><span class="o">.</span><span class="n">EVENTS</span> <span class="o">|</span> <span class="n">gdk</span><span class="o">.</span><span class="n">EventMask</span><span class="o">.</span><span class="n">STRUCTURE_MASK</span>
+        <span class="sd">&quot;&quot;&quot;`EventMask` : Drawing area event mask.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ImageWindow.__init__"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Drawing widget constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ImageWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_image</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_delay</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_filter</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">FILTER_NEAREST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_image_fit</span> <span class="o">=</span> <span class="n">FitType</span><span class="o">.</span><span class="n">FIT_OR_1TO1</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">ignore_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_animation</span><span class="p">)</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">ignore_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stop_animation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;map_event&#39;</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">)(</span><span class="n">start</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;unmap_event&#39;</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="s1">&#39;unmap&#39;</span><span class="p">)(</span><span class="n">stop</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">)(</span><span class="n">stop</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ImageWindow.get_image"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.get_image">[docs]</a>    <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get background image.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `None` or `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `rsvg.Handle`</span>
+<span class="sd">            Background image.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span></div>
+
+<div class="viewcode-block" id="ImageWindow.set_image"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.set_image">[docs]</a>    <span class="k">def</span> <span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set background image.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        img : `None` or `str` or `gtk.Image` or `gtk.gdk.Pixbuf` or `gtk.gdk.PixbufAnimation` or `rsvg.Handle`</span>
+<span class="sd">            Background image.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_animation</span><span class="p">()</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">get_image_size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_image</span> <span class="o">=</span> <span class="n">img</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_animation</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_angle</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_zoom</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_image_fit</span> <span class="o">!=</span> <span class="n">FitType</span><span class="o">.</span><span class="n">LAST</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_image_fit</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_animation</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ImageWindow.start_animation"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.start_animation">[docs]</a>    <span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start animation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_animation</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_animation</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_delay</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">get_timeval</span><span class="p">(</span><span class="n">start_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span> <span class="o">=</span> <span class="n">start_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="o">=</span> <span class="n">gobject</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">animation_step</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageWindow.stop_animation"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.stop_animation">[docs]</a>    <span class="k">def</span> <span class="nf">stop_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop animation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_animation</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="n">gobject</span><span class="o">.</span><span class="n">source_remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_delay</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ImageWindow.reset_animation"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.reset_animation">[docs]</a>    <span class="k">def</span> <span class="nf">reset_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Restart animation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_animation</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span><span class="o">.</span><span class="n">get_iter</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation_time</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ImageWindow.has_animation"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.has_animation">[docs]</a>    <span class="k">def</span> <span class="nf">has_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `bool`</span>
+<span class="sd">            `True` if background image is animated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">(),</span> <span class="n">PixbufAnimation</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageWindow.get_animation"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.get_animation">[docs]</a>    <span class="k">def</span> <span class="nf">get_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        `bool`</span>
+<span class="sd">            `True` if animation is started.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ImageWindow.set_animation"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.set_animation">[docs]</a>    <span class="k">def</span> <span class="nf">set_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set animation state.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        enable : `bool`</span>
+<span class="sd">            `True` to start animation, `False` to stop.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">enable</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_animation</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_animation</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ImageWindow.animation_step"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.animation_step">[docs]</a>    <span class="k">def</span> <span class="nf">animation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Animation timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span><span class="o">.</span><span class="n">advance</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">queue_draw</span><span class="p">()</span>
+
+        <span class="n">delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span><span class="o">.</span><span class="n">get_delay_time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">delay</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">delay</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIN_ANIMATION_DELAY</span><span class="p">,</span> <span class="n">delay</span><span class="p">)</span>
+        <span class="c1">#print(delay, self._prev_delay)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delay</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_delay</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_delay</span> <span class="o">=</span> <span class="n">delay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_animation_timeout</span> <span class="o">=</span> <span class="n">gobject</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span>
+            <span class="n">delay</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">animation_step</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ImageWindow.do_render"><a class="viewcode-back" href="../../source/pygtkdrawingwindow.html#pygtkdrawingwindow.image.ImageWindow.do_render">[docs]</a>    <span class="k">def</span> <span class="nf">do_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle `render` signal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ctx : `cairo.Context`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">rsvg</span><span class="o">.</span><span class="n">Handle</span><span class="p">):</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">render_cairo</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">PixbufAnimation</span><span class="p">):</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_animation</span><span class="o">.</span><span class="n">get_pixbuf</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">Pixbuf</span><span class="p">):</span>
+            <span class="n">cairo_set_source_pixbuf</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">get_source</span><span class="p">()</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_filter</span><span class="p">)</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">paint</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="n">err</span> <span class="o">=</span> <span class="n">gtk_image_new_from_stock</span><span class="p">(</span><span class="n">gtk</span><span class="o">.</span><span class="n">STOCK_MISSING_IMAGE</span><span class="p">,</span> <span class="n">IconSize</span><span class="o">.</span><span class="n">DIALOG</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">err</span><span class="p">)</span></div></div>
+        <span class="c1">#raise ValueError(&#39;Invalid image: &#39; + str(img))</span>
+
+
+<span class="n">gobject</span><span class="o">.</span><span class="n">type_register</span><span class="p">(</span><span class="n">ImageWindow</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, dead-beef.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
