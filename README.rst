@@ -31,6 +31,7 @@ Installation
 Usage
 -----
 
+-  `Documentation <https://dead-beef.github.io/pygtkdrawingwindow>`__
 -  `DrawingWindow example
    <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/demo.py>`__
 -  `ImageWindow example
