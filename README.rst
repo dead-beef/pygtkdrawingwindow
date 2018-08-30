@@ -32,10 +32,8 @@ Usage
 -----
 
 -  `Documentation <https://dead-beef.github.io/pygtkdrawingwindow>`__
--  `DrawingWindow example
-   <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/demo.py>`__
--  `ImageWindow example
-   <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/demo-image.py>`__
+-  `Examples
+   <https://github.com/dead-beef/pygtkdrawingwindow/blob/master/examples>`__
 
 Development
 -----------
